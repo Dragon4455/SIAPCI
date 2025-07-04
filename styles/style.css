@@ -1,0 +1,82 @@
+
+#body{
+    background-image: url("../images/fondo-bienvenida.png");
+    background-size: cover;
+}
+
+.div{
+    margin: auto;
+    display:grid;
+    grid-template-columns: auto;
+
+}
+
+.div > #title{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: auto;
+    height: auto;
+    font-size: 80px;
+    font-family: "Nunito", sans-serif;
+    padding-bottom: 40px;
+    color: darkcyan;}
+
+.div > #text{
+
+    display: block;
+    margin: 0 auto;
+    text-align: justify;
+    width: auto;
+    height: auto;
+    font-size: 40px;
+    font-family: "Nunito", sans-serif;
+    padding-bottom: 90px;}
+
+#botonBien{
+    margin: auto;
+    display: block;
+    background-color: rgb(202, 247, 247);
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    align-self: center;
+    border: 2px black solid;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-family: "Nunito", sans-serif;
+        outline-width: 1px;
+        outline-offset: 0;
+        outline-color: rgba(0, 130, 206, 0.75);
+        outline-style: solid;
+}
+
+#botonBien:hover{
+    animation: animateOutline 2s ease-in-out;
+}
+
+@keyframes animateOutline {
+  0% {
+    outline-width: 1px;
+    outline-offset: 0;
+    outline-color: rgba(0, 130, 206, 0);
+  }
+
+  10% {
+    outline-color: rgba(0, 130, 206, 0.75);
+  }
+
+  /* The animation finishes at 50% */
+  50% {
+    outline-width: 7px;
+    outline-offset: 4px;
+    outline-color: rgba(0, 130, 206, 0);
+  }
+
+  100% {
+    outline-width: 7px;
+    outline-offset: 4px;
+    outline-color: rgba(102, 102, 102, 0);
+  }
+}
