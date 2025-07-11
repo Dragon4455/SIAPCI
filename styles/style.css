@@ -1,4 +1,9 @@
 
+body{
+  background-image: url("../images/fondo-global.png");
+  background-size: cover;
+}
+
 #body{
     background-image: url("../images/fondo-bienvenida.png");
     background-size: cover;
