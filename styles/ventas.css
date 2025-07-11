@@ -1,16 +1,32 @@
 .bill__container{
     margin: 0 auto;
     width: 80%;
+    
+    box-shadow: 1px 1px 10px .2px black;
 }
-.bill__inputs{
+.bill__title{
+    background-color: rgb(29, 212, 245);
+    text-align: center;
+    padding: 15px;
+}
+.bill__inputs, .bill__products__inputs{
+    padding: 0 20px 20px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, .5fr);
 
     gap: 15px;
+    
+}
+
+.bill__products__inputs{
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 1px solid rgb(155, 155, 155);
 }
 .bill__input{
     display: flex;
     flex-direction: column;
-   
-   
+}
+.bill__input input{
+    padding: 8px;
 }
