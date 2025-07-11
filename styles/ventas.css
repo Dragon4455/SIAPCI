@@ -1,0 +1,14 @@
+.bill__container{
+    margin: 0 auto;
+    width: 80%;
+}
+.bill__inputs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.bill__input{
+    display: flex;
+    
+    justify-content: space-between;
+    gap: 20px;
+}
