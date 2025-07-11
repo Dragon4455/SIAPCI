@@ -1,0 +1,34 @@
+
+.bill__container{
+    margin: 0 auto;
+    width: 80%;
+     background-color: rgb(245, 255, 255);
+    box-shadow: 1px 1px 10px .2px black;
+}
+.bill__title{
+    background-color: rgb(207, 243, 255);
+    text-align: center;
+    padding: 15px;
+    font-family: "Roboto";
+}
+.bill__outputs, .bill__products__outputs{
+    padding: 0 20px 20px;
+    display: grid;
+    grid-template-columns: repeat(2, .5fr);
+    font-family: "Roboto";
+    gap: 15px;
+    
+}
+
+.bill__products__outputs{
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 1px solid rgb(155, 155, 155);
+     display:grid;
+    grid-template-columns: repeat(4, .5fr);
+}
+
+.bill__output output{
+    padding: 8px;
+}
+

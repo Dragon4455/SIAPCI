@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
+    <title>Factura</title>
     <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/ventas.css">
+    <link rel="stylesheet" href="styles/factura.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,35 +19,51 @@
     </nav>
     <main class="bill__container">
         <h2 class="bill__title">Factura de venta</h2>
-        <form class="bill__inputs" id="form">
-            <div class="bill__input">
-                <label for="" >Nombre</label>
-                <input type="text" >
+        <form class="bill__outputs" id="form">
+            <div class="bill__output">
+                <label for="" >Nombre:</label>
+                <p></p>
             </div>
-            <div class="bill__input">
-                <label for="">Rif</label>
-                <input type="text">
+            <div class="bill__output">
+                <label for="">Rif:</label>
+                <p></p>
             </div>
-            <div class="bill__input">
-                <label for="">Dirección</label>
-                <input type="text">
+            <div class="bill__output">
+                <label for="">Dirección:</label>
+                <p></p>
             </div>
-            <div class="bill__input">
-                <label for="">Teléfono</label>
-                <input type="text">
+            <div class="bill__output">
+                <label for="">Teléfono:</label>
+                <p></p>
+            </div>
+             <div class="bill__output">
+                <label for="">Número de Factura:</label>
+                <p></p>
+            </div>
+             <div class="bill__output">
+                <label for="">Tipo de Pago:</label>
+                <p></p>
             </div>
         </form>
         <div class="bill__products">
-            <div class="bill__products__inputs">
-                <div class="bill__input">
-                    <label for="">Nombre de articulo</label>
-                    <input type="text">
+            <div class="bill__products__outputs">
+                  <div class="bill__output">
+                    <label for="">Cantidad:</label>
+                    <div></div>
+                </div>
+                <div class="bill__output">
+                    <label for="">Nombre de articulo:</label>
+                    <div></div>
 
                 </div>
-                <div class="bill__input">
-                    <label for="">Codigo del articulo</label>
-                    <input type="text">
+                <div class="bill__output">
+                    <label for="">Codigo del articulo:</label>
+                    <div></div>
 
+                </div>
+                  <div class="bill__output">
+                    <label for="">Precio:</label>
+                    <div></div>
                 </div>
             </div>
         </div>
