@@ -1,9 +1,29 @@
-let cliente = {
+let BDCliente = [{
     nombre: "Neomar",
     direccion: "San Esteban",
     tlf: "12345",
-    rif: "31.325.616",
-};
+    rif: "31325616",
+},
+{
+    nombre: "Juan",
+    direccion: "San Esteban",
+    tlf: "12345",
+    rif: "0123456",
+}];
+let BDProducto = [{
+        nombre: "Pega",
+        disponible:1,
+        codigo: "12345",
+        precio: 20,
+}];
+
+
+// let cliente = {
+//     nombre: "Neomar",
+//     direccion: "San Esteban",
+//     tlf: "12345",
+//     rif: "31.325.616",
+// };
 let producto ={
         nombre: "Pega",
         cantidad:1,
@@ -11,7 +31,7 @@ let producto ={
         precio: 20,
 }
 function añadirProducto(nombre, cantidad,codigo,precio){
-    productos.push({
+   BDProducto.push({
         nombre: this.nombre,
         cantidad :this.cantidad,
         codigo: this.codigo,
@@ -19,9 +39,18 @@ function añadirProducto(nombre, cantidad,codigo,precio){
     })
 }
 
-let nuevoCliente = []
-let productos = [];
-
+function buscarCliente(){
+    
+    let cliente = BDCliente.filter(item => $inputRif.value === item.rif);
+    if(cliente.length){
+        $inputNomCli.value = cliente[0].nombre;
+        $inputDir.value = cliente[0].direccion;
+        $inputTel.value = cliente[0].tlf;
+        
+    } else{
+        alert("No encontrado")
+    }
+}
 
 let $inputNomCli = document.querySelector("#nombreCliente"),
     $inputRif = document.querySelector("#rifCliente"),
@@ -32,12 +61,7 @@ let $inputNomCli = document.querySelector("#nombreCliente"),
 
 $btnCliente.addEventListener("click", (e)=>{
     e.preventDefault();
-    if($inputNomCli.value === cliente.nombre){
-        $inputRif.value = cliente.rif;
-        $inputDir.value = cliente.direccion;
-        $inputTel.value = cliente.tlf;
-        
-    }
+    buscarCliente()
 });
 
 let $inputNomArt = document.querySelector("#nomArt"),
@@ -50,7 +74,6 @@ let $inputNomArt = document.querySelector("#nomArt"),
     e.preventDefault();
     if($inputNomArt.value === producto.nombre){
          $inputCod.value = producto.codigo;
-         $inputCan.value = producto.cantidad;
          $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
         
     }
