@@ -1,3 +1,6 @@
+//Objetos simuladores de la base de datos
+
+
 let BDCliente = [{
     nombre: "Neomar",
     direccion: "San Esteban",
@@ -12,24 +15,33 @@ let BDCliente = [{
 }];
 let BDProducto = [{
         nombre: "Pega",
-        disponible: 1,
-        codigo: "12345",
+        disponible: 10,
+        codigo: "002",
         precio: 20,
+       precioTotal: this.precio,
+},
+{
+        nombre: "Hoja",
+        disponible: 100,
+        codigo: "001",
+        precio: 3,
+       precioTotal: this.precio,
 }];
-let clienteActual = "";
 
-// let cliente = {
-//     nombre: "Neomar",
-//     direccion: "San Esteban",
-//     tlf: "12345",
-//     rif: "31.325.616",
-// };
+//Objetos contenedores del carrito
+let clienteActual = "";
+let articuloActual = "";
+
+let cart = [];
+
 let producto ={
         nombre: "Pega",
         cantidad:1,
         codigo: "12345",
         precio: 20,
 }
+
+//Funciones principales
 function añadirCliente(nombre, direccion,rif,tlf){
    BDCliente.push({
         nombre,
@@ -41,6 +53,7 @@ function añadirCliente(nombre, direccion,rif,tlf){
     console.log(BDCliente)
 }
 
+//Funciones de busqueda 
 function buscarCliente(busqueda){
     
     let cliente = BDCliente.filter(item => $inputRif.value === item.rif);
@@ -61,6 +74,30 @@ function buscarCliente(busqueda){
         alert("No encontrado");
     }
 }
+function buscarProducto(busqueda){
+    
+    let producto = BDProducto.filter(item => $inputCod.value === item.codigo);
+    
+    if(producto.length){
+        if(busqueda){
+            return true;
+        }
+        $inputNomArt.value = producto[0].nombre;
+        $inputPrec.value =  producto[0].precio ;
+        $inputCan.value =   $inputCan.value || 1;
+        producto[0].precioTotal =  producto[0].precio * $inputCan.value || producto[0].precio
+        producto[0].cantidad = $inputCan.value;
+        articuloActual = producto[0];
+       console.log(articuloActual)
+    } else{ 
+        if(busqueda){
+            return false
+        }
+        alert("No encontrado");
+    }
+}
+
+//Registro de cliente
 function registrarCliente(){
     if(!buscarCliente(true)){
         console.log("Hola");
@@ -110,14 +147,76 @@ let $inputNomArt = document.querySelector("#nomArt"),
 
     $btnArt.addEventListener("click", (e)=>{
     e.preventDefault();
-    if($inputNomArt.value === producto.nombre){
-         $inputCod.value = producto.codigo;
-         $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
+    buscarProducto();
+    // if($inputNomArt.value === producto.nombre){
+    //      $inputCod.value = producto.codigo;
+    //      $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
         
-    }
+    // }
         
     }
 );
 $inputCan.addEventListener("submit", (e)=>{
     $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
 })
+
+//Añadir al carrito de compra
+
+let $cart = document.querySelector("#cart"),
+    $btnCart = document.querySelector("#btnAgr");
+
+    $btnCart.addEventListener("click",(e) =>{
+        if(articuloActual){
+            let items = ""
+             items = document.querySelectorAll(".bill__cart__item");
+      
+            items.forEach(element => {
+               
+            element.remove(element)
+        });
+    
+
+
+            buscarProducto();
+            cart.push(articuloActual);
+            console.log(cart)
+
+            cart.forEach((item, index, array)=>{
+                
+                let contenedor = document.createElement("div");
+                contenedor.classList.add("bill__cart__item");
+                $cart.appendChild(contenedor)
+    
+                let itemName = document.createElement("p");
+                itemName.textContent = item.nombre;
+                contenedor.appendChild(itemName);
+
+                let itemCant = document.createElement("p");
+                let cartCant = document.createElement("input");
+                cartCant.value = item.cantidad;
+                
+                itemCant.appendChild(cartCant);
+                contenedor.appendChild(itemCant);
+
+                let itemPrice = document.createElement("p");
+                itemPrice.textContent = item.precioTotal;
+                contenedor.appendChild(itemPrice);
+
+                let itemDelete = document.createElement("button");
+                itemDelete.textContent = "Eliminar";
+                contenedor.appendChild(itemDelete);
+
+                itemDelete.addEventListener("click",(e)=>{
+                    $cart.removeChild(contenedor);
+                    
+                })
+            })
+
+            
+
+        } else{
+            alert("Debes buscar un producto para poder agregarlo");
+        }
+
+    })
+

@@ -46,27 +46,44 @@
         <div class="bill__products">
             <div class="bill__products__inputs">
                 <div class="bill__input">
-                    <label for="">Nombre de articulo</label>
-                    <input type="text" id="nomArt">
-
-                </div>
-                <div class="bill__input">
                     <label for="">Codigo del articulo</label>
                     <input type="text" id="codArt">
                     
                 </div>
                 <div class="bill__input">
-                    <label for="">cantidad del articulo</label>
+                    <label for="">Nombre de articulo</label>
+                    <input type="text" id="nomArt" disabled>
+
+                </div>
+                <div class="bill__input">
+                    <label for="">Cantidad del articulo</label>
                     <input type="text" id="canArt">
                     
                 </div>
                 <div class="bill__input">
-                    <label for="">precio del articulo</label>
-                    <input type="text" id="preArt">
+                    <label for="">Precio unitario</label>
+                    <input type="text" id="preArt" disabled>
                     
                 </div>
                 <button id="btnArt">Buscar articulo</button>
+                <button id="btnAgr">Agregar producto</button>
                
+            </div>
+        </div>
+
+        <div class="bill__cart" id="cart">
+            <div class="bill__cart__legends">
+                <p>Nombre</p>
+                <p>Cantidad</p>
+                <p>Precio</p>
+                <p> </p>
+            </div>
+            <div class="bill__cart__item">
+                <p id="item__name">Pega</p>
+                <p id="item__cant"><input type="number"></p>
+                <p id="item__price">20</p>
+                <button id="item__delete">Eliminar</button>
+                
             </div>
         </div>
         <a href="factura.html">para ir a factura</a>
