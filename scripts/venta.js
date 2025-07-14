@@ -1,6 +1,4 @@
 //Objetos simuladores de la base de datos
-
-
 let BDCliente = [{
     nombre: "Neomar",
     direccion: "San Esteban",
@@ -27,10 +25,21 @@ let BDProducto = [{
         precio: 3,
        precioTotal: this.precio,
 }];
-
+let BDFactura = [{
+     nombre: "Neomar",
+    direccion: "San Esteban",
+    tlf: "12345",
+    rif: "31325616",
+    metodo: "Pago movil",
+    nroFactura: "0001",
+    articulos: [],
+    iva: "",
+    montoTotal: "30bs",
+}]
 //Objetos contenedores del carrito
 let clienteActual = "";
 let articuloActual = "";
+let facturaActual = "";
 
 let cart = [];
 
@@ -194,7 +203,16 @@ let $cart = document.querySelector("#cart"),
                 let itemCant = document.createElement("p");
                 let cartCant = document.createElement("input");
                 cartCant.value = item.cantidad;
-                
+                cartCant.addEventListener("keydown", (e)=>{
+                   
+                    if(e.key === "Enter"){
+                        item.precioTotal = item.precio * cartCant.value || item.precio;
+                        item.cantidad = cartCant.value || 1;
+                        itemPrice.textContent = item.precioTotal;
+                        console.log(cart)
+                    }
+                })                
+
                 itemCant.appendChild(cartCant);
                 contenedor.appendChild(itemCant);
 
@@ -204,19 +222,24 @@ let $cart = document.querySelector("#cart"),
 
                 let itemDelete = document.createElement("button");
                 itemDelete.textContent = "Eliminar";
+                itemDelete.classList.add("item__delete")
                 contenedor.appendChild(itemDelete);
 
                 itemDelete.addEventListener("click",(e)=>{
                     $cart.removeChild(contenedor);
-                    
+                    let indexToDelete = cart.indexOf(item);
+                    console.log(indexToDelete)
+                    cart.splice(index, 1);
+                    console.log(cart)
                 })
             })
 
             
-
+            
         } else{
             alert("Debes buscar un producto para poder agregarlo");
         }
 
     })
 
+    

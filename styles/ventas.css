@@ -38,10 +38,16 @@
 }
 .bill__cart__item{
     background-color:rgb(232, 252, 255) ;
+    padding: 1rem 0; 
 }
 .bill__cart__legends, .bill__cart__item{
     text-align: center;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+}
+
+.item__delete{
+    background-color: rgb(29, 212, 245);
+    border-radius: 2%;
 }
 
