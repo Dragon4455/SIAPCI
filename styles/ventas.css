@@ -1,3 +1,23 @@
+nav{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--mainColor) ;
+}
+
+.menu__link{
+   width: 100%;
+   text-align: center;
+    text-decoration: none;
+    padding: 10px 15px;
+    color:black;
+    transition:all .2s ease
+
+}
+
+.menu__link:hover{
+    background-color: rgb(29, 212, 245);
+}
+
 .bill__container{
     margin: 0 auto;
     width: 80%;
@@ -50,4 +70,21 @@
     background-color: rgb(29, 212, 245);
     border-radius: 2%;
 }
+.bill__cart__method{
+    display:flex;
+    
+}
+.bill__method__inputs{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:0  14px;
+}
 
+.bill__method__input{
+    font-size: 24px;
+
+    padding: 20px;
+}
+.bill__method__input input{
+    transform: scale(1.3);
+}
