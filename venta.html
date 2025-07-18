@@ -24,12 +24,12 @@
         <h2 class="bill__title">Factura de venta</h2>
         <form class="bill__inputs" id="form">
             <div class="bill__input">
-                <label for="">Rif</label>
-                <input type="text" id="rifCliente">
-            </div>
-            <div class="bill__input">
                 <label for="">Nombre</label>
                 <input type="text" id="nombreCliente">
+            </div>
+            <div class="bill__input">
+                <label for="">Rif</label>
+                <input type="text" id="rifCliente">
             </div>
             <div class="bill__input">
                 <label for="">Dirección</label>
@@ -82,23 +82,23 @@
                 <div class="bill__method__inputs">
                     <div class="bill__method__input">
                         <label for="">Pago Movil</label>
-                        <input type="checkbox">
+                        <input type="checkbox" id="movil">
                     </div>
                     <div class="bill__method__input">
                         <label for="">Transferencia</label>
-                        <input type="checkbox">
+                        <input type="checkbox" id="transferencia">
                     </div>
                     <div class="bill__method__input">
-                        <label for="">Efectivo</label>
-                        <input type="checkbox">
+                        <label for="" >Efectivo</label>
+                        <input type="checkbox" id="efectivo">
                     </div>
                     <div class="bill__method__input">
                         <label for="">Divisa</label>
-                        <input type="checkbox">
+                        <input type="checkbox" id="divisa">
                     </div>
 
                 </div>
-                <a href="factura.html">para ir a factura</a>
+                <a href="factura.html" class="bill__method__button">Generar factura</a>
             </div>
             <!-- <div class="bill__cart__item">
                 <p id="item__name">Pega</p>

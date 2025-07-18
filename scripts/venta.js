@@ -127,7 +127,7 @@ function registrarCliente(){
 }
 
 
-//Eventos de los botones
+//Eventos de los botones de cliente y productos
 
 let $inputNomCli = document.querySelector("#nombreCliente"),
     $inputRif = document.querySelector("#rifCliente"),
@@ -243,3 +243,11 @@ let $cart = document.querySelector("#cart"),
     })
 
     
+//Selecionar metodo de pago
+
+let $checkMovil = document.querySelector("#movil"),
+    $checkTransfer = document.querySelector("#transferencia"),
+    $checkDivisa = document.querySelector("#divisa"),
+    $checkEfectivo = document.querySelector("#efectivo");
+
+   
