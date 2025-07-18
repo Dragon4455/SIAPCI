@@ -130,81 +130,88 @@ function registrarCliente(){
 //Eventos de los botones de cliente y productos
 
 let $inputNomCli = document.querySelector("#nombreCliente"),
-    $inputRif = document.querySelector("#rifCliente"),
-    $inputDir = document.querySelector("#dirCliente"),
-    $inputTel = document.querySelector("#telCliente"),
-    $btnBusCliente = document.querySelector("#btnBusCliente"),
-    $btnRegCliente = document.querySelector("#btnRegCliente");
+$inputRif = document.querySelector("#rifCliente"),
+$inputDir = document.querySelector("#dirCliente"),
+$inputTel = document.querySelector("#telCliente"),
+$btnBusCliente = document.querySelector("#btnBusCliente"),
+$btnRegCliente = document.querySelector("#btnRegCliente");
 
-$inputRif.addEventListener("submit", (e)=>{
-    buscarCliente()
-})
-$btnBusCliente.addEventListener("click", (e)=>{
-    e.preventDefault();
-    buscarCliente();
-});
-$btnRegCliente.addEventListener("click", (e)=>{
-    e.preventDefault();
-    registrarCliente();
-})
+if($inputRif && $inputRif && $inputDir && $inputTel && $btnBusCliente && $btnRegCliente){
+    
+    $inputRif.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        buscarCliente()
+    })
+    $btnBusCliente.addEventListener("click", (e)=>{
+        e.preventDefault();
+        buscarCliente();
+    });
+    $btnRegCliente.addEventListener("click", (e)=>{
+        e.preventDefault();
+        registrarCliente();
+    })
+}
 
 let $inputNomArt = document.querySelector("#nomArt"),
-    $inputCod = document.querySelector("#codArt"),
-    $inputCan = document.querySelector("#canArt"),
-    $inputPrec = document.querySelector("#preArt"),
-    $btnArt = document.querySelector("#btnArt");
-
+$inputCod = document.querySelector("#codArt"),
+$inputCan = document.querySelector("#canArt"),
+$inputPrec = document.querySelector("#preArt"),
+$btnArt = document.querySelector("#btnArt");
+if($btnArt && $inputCan){
+    
     $btnArt.addEventListener("click", (e)=>{
-    e.preventDefault();
-    buscarProducto();
-    // if($inputNomArt.value === producto.nombre){
-    //      $inputCod.value = producto.codigo;
-    //      $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
-        
-    // }
-        
-    }
-);
-$inputCan.addEventListener("submit", (e)=>{
-    $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
-})
+        e.preventDefault();
+        buscarProducto();
+        // if($inputNomArt.value === producto.nombre){
+            //      $inputCod.value = producto.codigo;
+            //      $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
+            
+            // }
+            
+        }
+    );
+    $inputCan.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
+    })
+}
 
 //Añadir al carrito de compra
 
 let $cart = document.querySelector("#cart"),
-    $btnCart = document.querySelector("#btnAgr");
-
+$btnCart = document.querySelector("#btnAgr");
+if($btnCart){
     $btnCart.addEventListener("click",(e) =>{
         if(articuloActual){
             let items = ""
-             items = document.querySelectorAll(".bill__cart__item");
-      
+            items = document.querySelectorAll(".bill__cart__item");
+            
             items.forEach(element => {
-               
-            element.remove(element)
-        });
-    
-
-
+                
+                element.remove(element)
+            });
+            
+            
+            
             buscarProducto();
             cart.push(articuloActual);
             console.log(cart)
-
+            
             cart.forEach((item, index, array)=>{
                 
                 let contenedor = document.createElement("div");
                 contenedor.classList.add("bill__cart__item");
                 $cart.appendChild(contenedor)
-    
+                
                 let itemName = document.createElement("p");
                 itemName.textContent = item.nombre;
                 contenedor.appendChild(itemName);
-
+                
                 let itemCant = document.createElement("p");
                 let cartCant = document.createElement("input");
                 cartCant.value = item.cantidad;
                 cartCant.addEventListener("keydown", (e)=>{
-                   
+                    
                     if(e.key === "Enter"){
                         item.precioTotal = item.precio * cartCant.value || item.precio;
                         item.cantidad = cartCant.value || 1;
@@ -212,19 +219,19 @@ let $cart = document.querySelector("#cart"),
                         console.log(cart)
                     }
                 })                
-
+                
                 itemCant.appendChild(cartCant);
                 contenedor.appendChild(itemCant);
-
+                
                 let itemPrice = document.createElement("p");
                 itemPrice.textContent = item.precioTotal;
                 contenedor.appendChild(itemPrice);
-
+                
                 let itemDelete = document.createElement("button");
                 itemDelete.textContent = "Eliminar";
                 itemDelete.classList.add("item__delete")
                 contenedor.appendChild(itemDelete);
-
+                
                 itemDelete.addEventListener("click",(e)=>{
                     $cart.removeChild(contenedor);
                     let indexToDelete = cart.indexOf(item);
@@ -233,25 +240,77 @@ let $cart = document.querySelector("#cart"),
                     console.log(cart)
                 })
             })
-
+            
             
             
         } else{
             alert("Debes buscar un producto para poder agregarlo");
         }
-
+        
     })
-
     
+}
+
+
 //Selecionar metodo de pago
 
 let $checkMovil = document.querySelector("#movil"),
-    $checkTransfer = document.querySelector("#transferencia"),
-    $checkDivisa = document.querySelector("#divisa"),
-    $checkEfectivo = document.querySelector("#efectivo");
+$checkTransfer = document.querySelector("#transferencia"),
+$checkDivisa = document.querySelector("#divisa"),
+$checkEfectivo = document.querySelector("#efectivo");
 
 // Evento de generación de factura
 
-let $buttonFactura = document.querySelector("#buttonFactura");
 
-$buttonFactura.addEventListener("click",)
+function rellenarFactura (){
+    let nombCli = document.querySelector("#nombCli"),
+    rifCli = document.querySelector("#rifCli"),
+    dirbCli = document.querySelector("#dirCli"),
+    telCli = document.querySelector("#telCli"),
+    numFac = document.querySelector("#numFact"),
+    tipPago = document.querySelector("#tipPago");
+    console.log("hola")
+    nombCli.textContent = clienteActual.nombre
+    
+    
+    }
+    // console.log(clienteActual);
+    let $buttonFactura = document.querySelector("#buttonFactura");
+    // export {clienteActual, cart}
+    if($buttonFactura){
+        
+        $buttonFactura.addEventListener("click", (e)=>{
+            e.preventDefault();
+            console.log(clienteActual)
+            if(cart && clienteActual && 
+                ($checkDivisa.checked === true ||
+                    $checkEfectivo.checked === true ||
+                    $checkMovil.checked === true ||
+                    $checkTransfer.checked === true)){
+                        let metodos = [];
+                        if($checkDivisa){
+                            metodos.push("Divisa")
+                        }
+                        if($checkEfectivo){
+                            metodos.push("Efectivo")
+                        }
+                        if($checkMovil){
+                            metodos.push("Movil");
+                        }
+                        if($checkTransfer){
+                            metodos.push("Transferencia");
+                        }
+                        clienteActual.metodo = 
+                        alert("Hola");
+                        localStorage.setItem("cliente", JSON.stringify(clienteActual));
+                        localStorage.setItem("productos", JSON.stringify(cart));
+
+                        window.location.href = "factura.html";
+                        
+                        
+                        
+                    } else{
+                        alert("Debes ingresar toda la información")
+                    }
+                })
+            }

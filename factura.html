@@ -5,73 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura</title>
-    <link rel="stylesheet" href="styles/menu.css">
-    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/factura.css">
+    <link rel="stylesheet" href="styles/navbar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <nav class="menu__nav">
-        <a href="menu.html" class="menu__link">Salir</a>
+        <a href="venta.html" class="menu__link">Salir</a>
     </nav>
     <main class="bill__container">
         <h2 class="bill__title">Factura de venta</h2>
-        <form class="bill__outputs" id="form">
+        <div class="bill__outputs" id="form">
             <div class="bill__output">
-                <label for="" >Nombre:</label>
-                <p></p>
-            </div>
-            <div class="bill__output">
-                <label for="">Rif:</label>
+                <p>Nombre: <span id="nombCli"></span></p>
                 <p></p>
             </div>
             <div class="bill__output">
-                <label for="">Dirección:</label>
-                <p></p>
+                <p>Rif: <span id="rifCli"></span></p>
+                <p id="rifCli"></p>
             </div>
             <div class="bill__output">
-                <label for="">Teléfono:</label>
-                <p></p>
+                <p>Dirección: <span id="dirCli"></span></p>
+                
             </div>
-             <div class="bill__output">
-                <label for="">Número de Factura:</label>
-                <p></p>
+            <div class="bill__output">
+                <p>Teléfono: <span id="telCli" ></span></p>
+                <p ></p>
             </div>
-             <div class="bill__output">
-                <label for="">Tipo de Pago:</label>
-                <p></p>
+            <div class="bill__output">
+                <p>Número de Factura:</p>
+                <p id="numFact"></p>
             </div>
-        </form>
+            <div class="bill__output">
+                <p>Tipo de Pago:</p>
+                <p id="tipPago"></p>
+            </div>
+            <div class="bill__output">
+                <p>Condición de pago:</p>
+                <p id="conPago"></p>
+            </div>
+        </div>
         <div class="bill__products">
-            <div class="bill__products__outputs">
-                  <div class="bill__output">
-                    <label for="">Cantidad:</label>
-                    <div></div>
-                </div>
-                <div class="bill__output">
-                    <label for="">Nombre de articulo:</label>
-                    <div></div>
+            <div class="bill__output__legend">
+                <p>Cantidad:</p>
+                <p>Nombre de articulo:</p>
+                <p>Codigo del articulo:</p>
+                <p>Precio:</p>
 
-                </div>
-                <div class="bill__output">
-                    <label for="">Codigo del articulo:</label>
-                    <div></div>
 
-                </div>
-                  <div class="bill__output">
-                    <label for="">Precio:</label>
-                    <div></div>
-                </div>
             </div>
+
+            <div class="bill__product">
+                <p id="item__cant">1</p>
+                <p id="item__name">Pega</p>
+                <p id="item__price">20</p>
+            </div>
+
+        </div>
+        <div class="bill__total">
+            <p>Subtotal: </p>
+            <p>IVA: </p>
+            <p>Total: </p>
         </div>
     </main>
     <article>
 
     </article>
-    <script src="/scripts/venta.js"></script>
+    <!-- <script src="/scripts/venta.js"></script> -->
+    <script>
+        window.onload = function () {
+
+            const clienteActual = localStorage.getItem("cliente");
+            const productos = localStorage.getItem("cliente");
+            console.log(clienteActual)
+            if (clienteActual) {
+                const cliente = JSON.parse(clienteActual);
+                console.log(cliente.nombre)
+                let nombCli = document.querySelector("#nombCli"),
+                    rifCli = document.querySelector("#rifCli"),
+                    dirCli = document.querySelector("#dirCli"),
+                    telCli = document.querySelector("#telCli"),
+                    numFac = document.querySelector("#numFact"),
+                    tipPago = document.querySelector("#tipPago");
+
+                nombCli.textContent = cliente.nombre;
+                rifCli.textContent = cliente.rif;
+                dirCli.textContent = cliente.direccion;
+               telCli.textContent = cliente.tlf;
+            }
+        }
+    </script>
 </body>
 
 </html>
