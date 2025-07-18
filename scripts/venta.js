@@ -250,4 +250,8 @@ let $checkMovil = document.querySelector("#movil"),
     $checkDivisa = document.querySelector("#divisa"),
     $checkEfectivo = document.querySelector("#efectivo");
 
-   
+// Evento de generación de factura
+
+let $buttonFactura = document.querySelector("#buttonFactura");
+
+$buttonFactura.addEventListener("click",)
