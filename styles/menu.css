@@ -5,7 +5,7 @@
 
 body{
     margin: 0;
-    
+    align-content: center;
 }
 h1{
     text-align: center;
@@ -16,6 +16,8 @@ h1{
     background-color: whitesmoke;
     margin: .1px;
     padding: 10px;
+    margin-bottom: 90px;
+    font-family: 'Nunito';
 }
 
 
@@ -24,19 +26,25 @@ nav{
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     width: 70%;
-    justify-content: space-evenly;
     margin: 0 auto;
-    
+    align-self: center;
+
 }
 
 .menu__link{
-   width: 70%;
+   width: 75%;
    text-align: center;
     text-decoration: none;
     padding: 40px 25px;
     color:black;
     transition:all .2s ease;
     background-color: var(--mainColor);
+    font-size: 25px;
+    font-family: 'Nunito';
+    outline-width: 1px;
+    outline-color: rgb(0, 0, 0);
+    outline-style: solid;
+    vertical-align: middle;
 }
 
 .menu__link:hover{
