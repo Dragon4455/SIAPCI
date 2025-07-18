@@ -1,0 +1,59 @@
+.Inv__Main{
+    margin-top: 40px;
+    margin-left: 15px;
+    display: grid;
+    width: 70%;
+    height: 50%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    column-gap: 20%;
+    font-family: 'Nunito';
+}
+
+#Inv__Search{
+    display: grid;
+    gap: 30px;
+    padding: 20px;
+    background-color: aliceblue;
+    width: 210px;
+    height: 400px;
+    overflow-y: scroll;
+    position:relative;
+    outline: 2px solid black;
+    scrollbar-color: rgb(171, 226, 240) whitesmoke; 
+    text-align: justify;
+}
+
+#Inv__Search>div{
+    background-color:aliceblue;
+}
+
+#Inv__Search >div:hover{
+    color: aqua;
+}
+
+#Inv__Over{
+    position: relative;
+    margin-left: 6px;
+    background-color: aliceblue;
+    height: 440px;
+    width: 800px;
+    outline: 2px solid black;
+    overflow-y: scroll;
+    scrollbar-color: rgb(171, 226, 240) whitesmoke;
+}
+
+#Inv__Buttons{
+
+    display: grid;
+    grid-template-columns: 150px 120px;
+    margin-left: 15px;
+}
+
+#Inv__Buttons > button{
+
+    width: 100px;
+    height: 30px;
+    margin-top: 2px;
+    border-radius: .4rem;
+}
