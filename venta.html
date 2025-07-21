@@ -86,7 +86,7 @@
 
             </div>
             <div class="bill__cart__method">
-                <div class="bill__method__inputs">
+                <div class="bill__method__inputs" id="methodContainer">
                     <div class="bill__method__input">
                         <label for="">Pago Movil</label>
                         <input type="checkbox" id="movil">
@@ -104,6 +104,14 @@
                         <input type="checkbox" id="divisa">
                     </div>
 
+                </div>
+                <div>
+                    <p>Condición de pago:</p>
+                    <select id="condition">
+                        <option value="contado">Contado </option>
+                        <option value="15-dias">15 dias </option>
+                        <option value="30-dias">30 dias </option>
+                    </select>
                 </div>
                 <a href="#" class="bill__method__button" id="buttonFactura">Generar factura</a>
             </div>

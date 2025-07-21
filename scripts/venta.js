@@ -31,6 +31,7 @@ let BDFactura = [{
     tlf: "12345",
     rif: "31325616",
     metodo: "Pago movil",
+    condicion: "contado",
     nroFactura: "0001",
     articulos: [],
     iva: "",
@@ -257,60 +258,81 @@ if($btnCart){
 let $checkMovil = document.querySelector("#movil"),
 $checkTransfer = document.querySelector("#transferencia"),
 $checkDivisa = document.querySelector("#divisa"),
-$checkEfectivo = document.querySelector("#efectivo");
+$checkEfectivo = document.querySelector("#efectivo"),
+$contenedorMetodos = document.querySelector("methodContainer");
+
+$checkDivisa.addEventListener("change", (e)=>{
+
+});
+
+// Seleccionar condición de pago
+let $condition = document.querySelector("#condition");
+
+$condition.addEventListener("change", (e)=>{
+    console.log(e.target.value)
+    if(e.target.value === "15-dias" || e.target.value === "30-dias"){
+        $checkTransfer.disabled = true;
+        $checkDivisa.disabled = true;
+        $checkEfectivo.disabled = true;
+        $checkMovil.disabled = true;
+        
+    }else{
+        $checkTransfer.disabled = false;
+        $checkDivisa.disabled = false;
+        $checkEfectivo.disabled = false;
+        $checkMovil.disabled = false;
+    }
+    clienteActual.condicion = e.target.value;
+})
 
 // Evento de generación de factura
 
+let $buttonFactura = document.querySelector("#buttonFactura");
+let metodos = [];
 
-function rellenarFactura (){
-    let nombCli = document.querySelector("#nombCli"),
-    rifCli = document.querySelector("#rifCli"),
-    dirbCli = document.querySelector("#dirCli"),
-    telCli = document.querySelector("#telCli"),
-    numFac = document.querySelector("#numFact"),
-    tipPago = document.querySelector("#tipPago");
-    console.log("hola")
-    nombCli.textContent = clienteActual.nombre
+
+
+if($buttonFactura){
     
-    
-    }
-    // console.log(clienteActual);
-    let $buttonFactura = document.querySelector("#buttonFactura");
-    // export {clienteActual, cart}
-    if($buttonFactura){
+    $buttonFactura.addEventListener("click", (e)=>{
+        e.preventDefault();
         
-        $buttonFactura.addEventListener("click", (e)=>{
-            e.preventDefault();
-            console.log(clienteActual)
-            if(cart && clienteActual && 
-                ($checkDivisa.checked === true ||
-                    $checkEfectivo.checked === true ||
-                    $checkMovil.checked === true ||
-                    $checkTransfer.checked === true)){
-                        let metodos = [];
-                        if($checkDivisa){
-                            metodos.push("Divisa")
-                        }
-                        if($checkEfectivo){
-                            metodos.push("Efectivo")
-                        }
-                        if($checkMovil){
-                            metodos.push("Movil");
-                        }
-                        if($checkTransfer){
-                            metodos.push("Transferencia");
-                        }
-                        clienteActual.metodo = 
-                        alert("Hola");
-                        localStorage.setItem("cliente", JSON.stringify(clienteActual));
-                        localStorage.setItem("productos", JSON.stringify(cart));
+        if(cart && clienteActual && $checkDivisa.checked){
+            metodos.push("Divisa");
+            
+        } 
+        if(cart && clienteActual && $checkEfectivo.checked){
+            metodos.push("Efectivo");
+        } 
+        if(cart && clienteActual && $checkMovil.checked){
+            metodos.push("Pago Movil");
+        } 
+        if(cart && clienteActual && $checkTransfer.checked){
+            metodos.push("Transferencia");
+        } 
+        
+        if(cart && clienteActual && metodos){
+            if(!clienteActual.condicion){
+                 clienteActual.condicion = "Contado";
+            
+             }
+            console.log(metodos)
+                     clienteActual.metodo = metodos.join(", ");
+                    metodos = [];
+                    
+                     alert("Hola");
+                     localStorage.setItem("cliente", JSON.stringify(clienteActual, null, 2));
+                     localStorage.setItem("productos", JSON.stringify(cart, null, 2));
+                     localStorage.setItem("bdfacturas", JSON.stringify(BDFactura, null, 2));
+                     console.log(clienteActual)
+                     window.location.href = "factura.html";
+                     
+                     
+                     
+                 } else{
+                     alert("Debes ingresar toda la información")
+                 }
+             })
+         }
 
-                        window.location.href = "factura.html";
-                        
-                        
-                        
-                    } else{
-                        alert("Debes ingresar toda la información")
-                    }
-                })
-            }
+

@@ -37,41 +37,43 @@
                 <p ></p>
             </div>
             <div class="bill__output">
-                <p>Número de Factura:</p>
-                <p id="numFact"></p>
+                <p>Número de Factura: <span id="numFact"></span></p>
+                <p ></p>
             </div>
             <div class="bill__output">
-                <p>Tipo de Pago:</p>
-                <p id="tipPago"></p>
+                <p>Tipo de Pago: <span id="tipPago"></span></p>
+                
             </div>
             <div class="bill__output">
-                <p>Condición de pago:</p>
-                <p id="conPago"></p>
+                <p>Condición de pago: <span id="conPago"></span></p>
+                <p ></p>
             </div>
         </div>
         <div class="bill__products">
             <div class="bill__output__legend">
                 <p>Cantidad:</p>
                 <p>Nombre de articulo:</p>
-                <p>Codigo del articulo:</p>
+                <p>Precio Unitario:</p>
                 <p>Precio:</p>
 
 
             </div>
 
-            <div class="bill__product">
+            <!-- <div class="bill__product">
                 <p id="item__cant">1</p>
                 <p id="item__name">Pega</p>
+                <p id="item__name">Pega</p>
                 <p id="item__price">20</p>
-            </div>
+            </div> -->
 
         </div>
         <div class="bill__total">
-            <p>Subtotal: </p>
-            <p>IVA: </p>
-            <p>Total: </p>
+            <p>Subtotal: <span id="subTotal"></span>bs</p>
+            <p >IVA: <span id="iva"></span>bs</p>
+            <p >Total: <span id="total"> </span>bs</p>
         </div>
     </main>
+    <button id="print">Imprimir</button>
     <article>
 
     </article>
@@ -80,24 +82,77 @@
         window.onload = function () {
 
             const clienteActual = localStorage.getItem("cliente");
-            const productos = localStorage.getItem("cliente");
-            console.log(clienteActual)
+            const productos = localStorage.getItem("productos");
+            const facturas = localStorage.getItem("bdfacturas");
+            console.log(clienteActual);
             if (clienteActual) {
                 const cliente = JSON.parse(clienteActual);
+                const cart = JSON.parse(productos);
+                const bdfacturas = JSON.parse(facturas);
+                console.log(bdfacturas)
                 console.log(cliente.nombre)
                 let nombCli = document.querySelector("#nombCli"),
                     rifCli = document.querySelector("#rifCli"),
                     dirCli = document.querySelector("#dirCli"),
                     telCli = document.querySelector("#telCli"),
                     numFac = document.querySelector("#numFact"),
-                    tipPago = document.querySelector("#tipPago");
+                    tipPago = document.querySelector("#tipPago"),
+                    conPago = document.querySelector("#conPago")
 
                 nombCli.textContent = cliente.nombre;
                 rifCli.textContent = cliente.rif;
                 dirCli.textContent = cliente.direccion;
                telCli.textContent = cliente.tlf;
+               numFac.textContent = String(bdfacturas.length + 1).padStart(3, '0');
+               tipPago.textContent = cliente.metodo;
+               conPago.textContent = cliente.condicion;
+
+               let $cart = document.querySelector(".bill__products");
+               console.log(cart)
+                cart.forEach((item, index, )=>{
+                
+                let contenedor = document.createElement("div");
+    
+                contenedor.classList.add("bill__product");
+                $cart.appendChild(contenedor)
+                
+                
+                let itemCant = document.createElement("p");
+                itemCant.textContent = item.cantidad;
+                contenedor.appendChild(itemCant);
+                
+                let itemName = document.createElement("p");
+                itemName.textContent = item.nombre;
+                contenedor.appendChild(itemName);
+               
+                
+                let itemUnitPrice = document.createElement("p");
+                itemUnitPrice.textContent = item.precio + "bs";
+                contenedor.appendChild(itemUnitPrice);
+
+                let itemPrice = document.createElement("p");
+                itemPrice.textContent = item.precioTotal + "bs";
+                contenedor.appendChild(itemPrice);
+                
+                
+              
+            });
+                let subtotal = document.querySelector("#subTotal");
+                let iva = document.querySelector("#iva");
+                let total = document.querySelector("#total");
+                subtotal.textContent = cart.reduce((sum , actual) => sum + actual.precioTotal , 0);
+                 iva.textContent = (subtotal.textContent * 0.16).toFixed(2);
+                total.textContent = (+subtotal.textContent + +iva.textContent).toFixed(2);
+                
             }
+
         }
+
+        let printBtn = document.querySelector("#print");
+
+        printBtn.addEventListener("click", (e)=>{
+            window.print();
+        })
     </script>
 </body>
 
