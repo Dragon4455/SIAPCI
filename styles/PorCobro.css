@@ -1,8 +1,22 @@
 .facturas-container {
         display: flex;
-        justify-content: center;
         align-items: center;
+        flex-direction: column;
+        background: rgb(207, 243, 255);
+        box-shadow: 0 6px 32px rgba(0,0,0,0.12);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        max-width: 500px;
+        width: 100%;
+        margin: 2rem auto;
         min-height: 60vh;
+        
+    }
+    .facturas-container h2 {
+        align-self: flex-start;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        text-align: center;
     }
     #clientes-lista {
         display: flex;
