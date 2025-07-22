@@ -1,42 +1,72 @@
 //Objetos simuladores de la base de datos
-let BDCliente = [{
-    nombre: "Neomar",
-    direccion: "San Esteban",
-    tlf: "12345",
-    rif: "31325616",
-},
-{
-    nombre: "Elías",
-    direccion: "Vistamar",
-    tlf: "12345",
-    rif: "31779388",
-}];
-let BDProducto = [{
-        nombre: "Pega",
-        disponible: 10,
-        codigo: "002",
-        precio: 20,
-       precioTotal: this.precio,
-},
-{
-        nombre: "Hoja",
-        disponible: 100,
-        codigo: "001",
-        precio: 3,
-       precioTotal: this.precio,
-}];
-let BDFactura = [{
-     nombre: "Neomar",
-    direccion: "San Esteban",
-    tlf: "12345",
-    rif: "31325616",
-    metodo: "Pago movil",
-    condicion: "contado",
-    nroFactura: "0001",
-    articulos: [],
-    iva: "",
-    montoTotal: "30bs",
-}]
+let JsonClientes = localStorage.getItem("BDCliente");
+let BDCliente = JSON.parse(JsonClientes);
+
+console.log(BDCliente)
+
+let JsonProductos = localStorage.getItem("BDProducto");
+let BDProducto = JSON.parse(JsonProductos);
+
+let JsonFactura = localStorage.getItem("BDFactura");
+let BDFactura = JSON.parse(JsonFactura);
+
+let JsonPorCobrar = localStorage.getItem("BDPorCobrar");
+let BDPorCobrar = JSON.parse(JsonPorCobrar);
+
+
+
+
+// let BDCliente = [{
+//     nombre: "Neomar",
+//     direccion: "San Esteban",
+//     tlf: "12345",
+//     rif: "31325616",
+// },
+// {
+//     nombre: "Elías",
+//     direccion: "Vistamar",
+//     tlf: "12345",
+//     rif: "31779388",
+// }];
+
+// let BDPorCobrar = [{
+//       nombre: "Neomar",
+//     direccion: "San Esteban",
+//     tlf: "12345",
+//     rif: "31325616",
+//     condicion: "contado",
+//     articulos: [],
+//     iva: "",
+//     montoTotal: "30bs",
+// }]
+
+
+// let BDProducto = [{
+//         nombre: "Pega",
+//         disponible: 10,
+//         codigo: "002",
+//         precio: 20,
+//        precioTotal: this.precio,
+// },
+// {
+//         nombre: "Hoja",
+//         disponible: 100,
+//         codigo: "001",
+//         precio: 3,
+//        precioTotal: this.precio,
+// }];
+// let BDFactura = [{
+//      nombre: "Neomar",
+//     direccion: "San Esteban",
+//     tlf: "12345",
+//     rif: "31325616",
+//     metodo: "Pago movil",
+//     condicion: "contado",
+//     nroFactura: "0001",
+//     articulos: [],
+//     iva: "",
+//     montoTotal: "30bs",
+// }]
 //Objetos contenedores del carrito
 let clienteActual = "";
 let articuloActual = "";
@@ -60,6 +90,10 @@ function añadirCliente(nombre, direccion,rif,tlf){
         tlf,
     });
     alert("Registro exitoso")
+    let nuevojson = JSON.stringify(BDCliente);
+    
+    localStorage.setItem("BDCliente", nuevojson);
+
     console.log(BDCliente)
 }
 
@@ -319,7 +353,10 @@ if($buttonFactura){
             console.log(metodos)
                      clienteActual.metodo = metodos.join(", ");
                     metodos = [];
-                    
+                    facturaActual = {...clienteActual};
+                    facturaActual.articulos = [...cart];
+                    facturaActual.nroFactura = String(BDFactura.length + 1).padStart(3, '0');
+                    BDFactura.push(facturaActual);
                      alert("Hola");
                      localStorage.setItem("cliente", JSON.stringify(clienteActual, null, 2));
                      localStorage.setItem("productos", JSON.stringify(cart, null, 2));
@@ -336,3 +373,16 @@ if($buttonFactura){
          }
 
 
+//Añadir Factura por cobrar
+
+let $buttonPorCobrar = document.querySelector("#buttonPorCobrar");
+$buttonPorCobrar.addEventListener("click", (e)=>{
+   if($condition.value === "15-dias" || $condition.value === "30-dias" && cart && clienteActual){
+    facturaActual = {...clienteActual};
+    facturaActual.articulos = [...cart];
+    BDPorCobrar.push(facturaActual);
+     localStorage.setItem("BDPorCobrar", JSON.stringify(BDPorCobrar, null, 2));
+   } else{
+    alert("Debes establecer una condicion d pago de 15 o 30 días");
+   }
+})

@@ -68,9 +68,9 @@
 
         </div>
         <div class="bill__total">
-            <p>Subtotal: <span id="subTotal"></span>bs</p>
-            <p >IVA: <span id="iva"></span>bs</p>
-            <p >Total: <span id="total"> </span>bs</p>
+            <p>Subtotal: <span id="subTotal"></span> Bs</p>
+            <p >IVA(16%): <span id="iva"></span> Bs</p>
+            <p >Total: <span id="total"> </span> Bs</p>
         </div>
     </main>
     <button id="print">Imprimir</button>
@@ -89,8 +89,12 @@
                 const cliente = JSON.parse(clienteActual);
                 const cart = JSON.parse(productos);
                 const bdfacturas = JSON.parse(facturas);
+
+    
+               
+
                 console.log(bdfacturas)
-                console.log(cliente.nombre)
+        
                 let nombCli = document.querySelector("#nombCli"),
                     rifCli = document.querySelector("#rifCli"),
                     dirCli = document.querySelector("#dirCli"),
@@ -103,7 +107,7 @@
                 rifCli.textContent = cliente.rif;
                 dirCli.textContent = cliente.direccion;
                telCli.textContent = cliente.tlf;
-               numFac.textContent = String(bdfacturas.length + 1).padStart(3, '0');
+               numFac.textContent = String(bdfacturas.length).padStart(3, '0');
                tipPago.textContent = cliente.metodo;
                conPago.textContent = cliente.condicion;
 
@@ -127,11 +131,11 @@
                
                 
                 let itemUnitPrice = document.createElement("p");
-                itemUnitPrice.textContent = item.precio + "bs";
+                itemUnitPrice.textContent = item.precio + " Bs";
                 contenedor.appendChild(itemUnitPrice);
 
                 let itemPrice = document.createElement("p");
-                itemPrice.textContent = item.precioTotal + "bs";
+                itemPrice.textContent = item.precioTotal + " Bs";
                 contenedor.appendChild(itemPrice);
                 
                 

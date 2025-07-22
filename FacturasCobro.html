@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura por cobrar</title>
     <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/inventario.css">
+    <link rel="stylesheet" href="styles/PorCobro.css">
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
@@ -24,5 +24,39 @@
         <a href="ayuda.html" class="menu__link">Ayuda</a>
         <a href="index.html" class="menu__link">Salir</a>
     </nav>
+    <div class="facturas-container">
+        <div id="clientes-lista"></div>
+    </div>
 
+    <div id="modal-factura" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Detalle de Factura</h2>
+            <div id="detalle-articulos"></div>
+            <div class="totales">
+                <div>IVA (16%): <span id="iva"></span></div>
+                <div>Total a Pagar: <span id="total"></span></div>
+            </div>
+            <div class="metodo-pago">
+                <label><input type="checkbox" name="pago" value="Pago Movil"> Pago Móvil</label>
+                <label><input type="checkbox" name="pago" value="Efectivo"> Efectivo</label>
+                <label><input type="checkbox" name="pago" value="Divisa"> Divisa</label>
+                <label><input type="checkbox" name="pago" value="Transferencia"> Transferencia</label>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="scripts/porCobrar.js"></script>
+        
+    </script>
+    </script>
+<!-- <script>
+     let JsonProductos = localStorage.getItem("BDProducto");
+        let BDProducto = JSON.parse(JsonProductos);
+let JsonPorCobrar = localStorage.getItem("BDPorCobrar");
+let BDPorCobrar = JSON.parse(JsonPorCobrar);
+
+</script> -->
 </body>
