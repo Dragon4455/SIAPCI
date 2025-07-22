@@ -62,3 +62,5 @@ localStorage.setItem("BDPorCobrar", JSON.stringify(BDPorCobrar));
 localStorage.setItem("BDProducto", JSON.stringify(BDProducto));
 localStorage.setItem("BDFactura", JSON.stringify(BDFactura));
 
+
+

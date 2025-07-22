@@ -174,8 +174,8 @@ $btnRegCliente = document.querySelector("#btnRegCliente");
 if($inputRif && $inputRif && $inputDir && $inputTel && $btnBusCliente && $btnRegCliente){
     
     $inputRif.addEventListener("submit", (e)=>{
-        e.preventDefault()
-        buscarCliente()
+        e.preventDefault();
+        buscarCliente();
     })
     $btnBusCliente.addEventListener("click", (e)=>{
         e.preventDefault();
