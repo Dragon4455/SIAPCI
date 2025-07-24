@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportes</title>
     <link rel="stylesheet" href="styles/navbar.css">
-    
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +28,7 @@
 
     <div class="reportes__botones">
         <button id="ventasBtn" class="reporte-btn">Reporte de Ventas</button>
-        <button id="facturasBtn" class="reporte-btn">Reporte de Facturas</button>
+        <button id="facturasBtn" class="reporte-btn">Reporte de Facturas por cobrar</button>
         <button id="inventarioBtn" class="reporte-btn">Reporte de Inventario</button>
     </div>
 
@@ -47,7 +48,7 @@
                     <div>Total de la Venta</div>
                     <div>Forma de Pago</div>
                 </div>
-                <!-- Las filas se generan dinámicamente -->
+
             </div>
         </div>
     </div>
@@ -56,7 +57,7 @@
     <div id="facturasModal" class="modal">
         <div class="modal-content">
             <span class="close" data-modal="facturasModal">&times;</span>
-            <h2>Reporte de Facturas</h2>
+            <h2>Reporte de Facturas por cobrar</h2>
             <div class="custom-table" id="facturasTable">
                 <div class="custom-table-header">
                     <div>No. Factura</div>
@@ -67,7 +68,7 @@
                     <div>Fecha de vencimiento</div>
                     <div>Estado</div>
                 </div>
-                <!-- Las filas se generan dinámicamente -->
+
             </div>
         </div>
     </div>
@@ -87,7 +88,7 @@
                     <div>Ultima Actualización</div>
                     <div>Nivel de Reorden</div>
                 </div>
-                <!-- Las filas se generan dinámicamente -->
+
             </div>
         </div>
     </div>
@@ -97,10 +98,22 @@
             display: flex;
             gap: 1rem;
             justify-content: center;
-            margin: 2rem 0;
+            flex-direction: column;
+            display: flex;
+            background: rgb(235, 250, 255);
+            box-shadow: 0 6px 32px rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            max-width: 500px;
+            width: 100%;
+            margin: 2rem auto;
+            min-height: 30vh;
+
+
         }
+
         .reporte-btn {
-            padding: 0.75rem 1.5rem;
+            padding: 1rem 1.5rem;
             font-size: 1rem;
             background: #2d6cdf;
             color: #fff;
@@ -109,18 +122,23 @@
             cursor: pointer;
             transition: background 0.2s;
         }
+
         .reporte-btn:hover {
             background: #1a4fa0;
         }
+
         .modal {
             display: none;
             position: fixed;
             z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
             overflow: auto;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
         }
+
         .modal-content {
             background: #fff;
             margin: 5% auto;
@@ -129,8 +147,9 @@
             width: 90%;
             max-width: 900px;
             position: relative;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
         }
+
         .close {
             position: absolute;
             right: 1rem;
@@ -139,114 +158,129 @@
             color: #888;
             cursor: pointer;
         }
+
         .close:hover {
             color: #2d6cdf;
         }
+
         .custom-table {
             width: 100%;
             margin-top: 1.5rem;
         }
-        .custom-table-header, .custom-table-row {
+
+        .custom-table-header,
+        .custom-table-row {
             display: grid;
             align-items: center;
             padding: 0.5rem 0;
         }
+
         /* Column templates for each table */
         #ventasModal .custom-table-header,
         #ventasModal .custom-table-row {
             grid-template-columns: repeat(8, 1fr);
         }
+
         #facturasModal .custom-table-header,
         #facturasModal .custom-table-row {
             grid-template-columns: repeat(7, 1fr);
         }
+
         #inventarioModal .custom-table-header,
         #inventarioModal .custom-table-row {
             grid-template-columns: repeat(7, 1fr);
         }
+
         .custom-table-header {
             font-weight: bold;
             background: #f0f4fa;
             border-bottom: 2px solid #2d6cdf;
         }
+
         .custom-table-row {
             border-bottom: 1px solid #e0e0e0;
         }
+
         .custom-table-row:last-child {
             border-bottom: none;
         }
-        .custom-table-row > div, .custom-table-header > div {
+
+        .custom-table-row>div,
+        .custom-table-header>div {
             padding: 0.5rem;
             text-align: center;
             word-break: break-word;
         }
+
         @media (max-width: 700px) {
             .modal-content {
                 padding: 1rem;
             }
-            .custom-table-header, .custom-table-row {
+
+            .custom-table-header,
+            .custom-table-row {
                 font-size: 0.85rem;
             }
         }
     </style>
 
-    <script> 
-    let JsonProductos = localStorage.getItem("BDProducto");
-    let BDProducto = JSON.parse(JsonProductos) || [];
-    let JsonPorCobrar = localStorage.getItem("BDPorCobrar");
-    let BDPorCobrar = JSON.parse(JsonPorCobrar) || [];
-    let JsonFacturas = localStorage.getItem("BDFactura");
-    let BDFacturas = JSON.parse(JsonFacturas) || [];
-   
-    document.addEventListener('DOMContentLoaded', function() {
-        const modals = {
-            ventasModal: document.getElementById('ventasModal'),
-            facturasModal: document.getElementById('facturasModal'),
-            inventarioModal: document.getElementById('inventarioModal')
-        };
+    <script>
+        let JsonProductos = localStorage.getItem("BDProducto");
+        let BDProducto = JSON.parse(JsonProductos) || [];
+        let JsonPorCobrar = localStorage.getItem("BDPorCobrar");
+        let BDPorCobrar = JSON.parse(JsonPorCobrar) || [];
+        let JsonFacturas = localStorage.getItem("BDFactura");
+        let BDFacturas = JSON.parse(JsonFacturas) || [];
 
-        document.getElementById('ventasBtn').addEventListener('click', function() {
-            generarTablaVentas();
-            modals.ventasModal.style.display = 'block';
-        });
-        document.getElementById('facturasBtn').addEventListener('click', function() {
-            generarTablaFacturas();
-            modals.facturasModal.style.display = 'block';
-        });
-        document.getElementById('inventarioBtn').addEventListener('click', function() {
-            generarTablaInventario();
-            modals.inventarioModal.style.display = 'block';
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const modals = {
+                ventasModal: document.getElementById('ventasModal'),
+                facturasModal: document.getElementById('facturasModal'),
+                inventarioModal: document.getElementById('inventarioModal')
+            };
 
-        document.querySelectorAll('.close').forEach(function(span) {
-            span.addEventListener('click', function() {
-                const modalId = this.getAttribute('data-modal');
-                modals[modalId].style.display = 'none';
+            document.getElementById('ventasBtn').addEventListener('click', function () {
+                generarTablaVentas();
+                modals.ventasModal.style.display = 'block';
             });
-        });
-
-        window.addEventListener('click', function(event) {
-            Object.values(modals).forEach(function(modal) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
+            document.getElementById('facturasBtn').addEventListener('click', function () {
+                generarTablaFacturas();
+                modals.facturasModal.style.display = 'block';
             });
-        });
+            document.getElementById('inventarioBtn').addEventListener('click', function () {
+                generarTablaInventario();
+                modals.inventarioModal.style.display = 'block';
+            });
 
-        function generarTablaVentas() {
-            const ventasTable = document.getElementById('ventasTable');
-            // Elimina filas previas
-            ventasTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
+            document.querySelectorAll('.close').forEach(function (span) {
+                span.addEventListener('click', function () {
+                    const modalId = this.getAttribute('data-modal');
+                    modals[modalId].style.display = 'none';
+                });
+            });
 
-            if (!Array.isArray(BDFacturas)){
-                return;
-            } else {
-                BDFacturas.forEach((factura, idx) => {
-                    let totalVenta = parseFloat(factura.montoTotal) || 0;
-                    factura.articulos.forEach(item => {
-                        const row = document.createElement('div');
-                        row.className = 'custom-table-row';
-                        row.innerHTML = `
+            window.addEventListener('click', function (event) {
+                Object.values(modals).forEach(function (modal) {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+
+            function generarTablaVentas() {
+                const ventasTable = document.getElementById('ventasTable');
+                // Elimina filas previas
+                ventasTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
+
+                if (!Array.isArray(BDFacturas)) {
+                    return;
+                } else {
+                    BDFacturas.forEach((factura, idx) => {
+                        let totalVenta = parseFloat(factura.montoTotal) || 0;
+                        factura.articulos.forEach(item => {
+                            const row = document.createElement('div');
+                            row.className = 'custom-table-row';
+                            row.innerHTML = `
                             <div>${factura.fecha || ''}</div>
                             <div>${factura.nroFactura || idx + 1}</div>
                             <div>${item.nombre || ''}</div>
@@ -256,24 +290,24 @@
                             <div>${totalVenta != null ? Number(totalVenta).toFixed(2) : ''}</div>
                             <div>${factura.metodo || ''}</div>
                         `;
-                        ventasTable.appendChild(row);
+                            ventasTable.appendChild(row);
+                        });
                     });
-                });
-            } 
-        }
+                }
+            }
 
-        function generarTablaFacturas() {
-            const facturasTable = document.getElementById('facturasTable');
-            // Elimina filas previas
-            facturasTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
+            function generarTablaFacturas() {
+                const facturasTable = document.getElementById('facturasTable');
+                // Elimina filas previas
+                facturasTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
 
-            if (!Array.isArray(BDPorCobrar)) {
-                return;
-            } else {
-                BDPorCobrar.forEach((factura, idx) => {
-                    const row = document.createElement('div');
-                    row.className = 'custom-table-row';
-                    row.innerHTML = `
+                if (!Array.isArray(BDPorCobrar)) {
+                    return;
+                } else {
+                    BDPorCobrar.forEach((factura, idx) => {
+                        const row = document.createElement('div');
+                        row.className = 'custom-table-row';
+                        row.innerHTML = `
                         <div>${factura.nroFactura || idx + 1}</div>
                         <div>${factura.fecha || ''}</div>
                         <div>${factura.nombre || ''}</div>
@@ -282,23 +316,23 @@
                         <div>${factura.vencimiento || ''}</div>
                         <div>${factura.estado || ''}</div>
                     `;
-                    facturasTable.appendChild(row);
-                });
+                        facturasTable.appendChild(row);
+                    });
+                }
             }
-        }
 
-        function generarTablaInventario() {
-            const inventarioTable = document.getElementById('inventarioTable');
-            // Elimina filas previas
-            inventarioTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
+            function generarTablaInventario() {
+                const inventarioTable = document.getElementById('inventarioTable');
+                // Elimina filas previas
+                inventarioTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
 
-            if (!Array.isArray(BDProducto)) {
-                return;
-            } else {
-                BDProducto.forEach(producto => {
-                    const row = document.createElement('div');
-                    row.className = 'custom-table-row';
-                    row.innerHTML = `
+                if (!Array.isArray(BDProducto)) {
+                    return;
+                } else {
+                    BDProducto.forEach(producto => {
+                        const row = document.createElement('div');
+                        row.className = 'custom-table-row';
+                        row.innerHTML = `
                         <div>${producto.codigo || ''}</div>
                         <div>${producto.nombre || ''}</div>
                         <div>${producto.disponible || ''}</div>
@@ -307,11 +341,11 @@
                         <div>${producto.ultimaActualizacion || ''}</div>
                         <div>${producto.nivelReorden != null ? producto.nivelReorden : ''}</div>
                     `;
-                    inventarioTable.appendChild(row);
-                });
+                        inventarioTable.appendChild(row);
+                    });
+                }
             }
-        }
-    });
+        });
     </script>
     </script>
 </body>

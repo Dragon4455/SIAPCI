@@ -28,14 +28,14 @@ let BDPorCobrar = [{
 
     },
     {
-        nombre: "Hoja",
+        nombre: "Pega",
         cantidad: 2,
-        precio: 3,
-        precioTotal: 6,
+        precio: 20,
+        precioTotal: 40,
 
     }
     ],
-    montoTotal: 12,
+    montoTotal: 46,
     estado: "Pendiente"
 }]
 
@@ -74,15 +74,15 @@ let BDFactura = [{
 
     },
     {
-        nombre: "Hoja",
+        nombre: "Pega",
         cantidad: 2,
-        precio: 3,
-        precioTotal: 6,
+        precio: 20,
+        precioTotal: 40,
 
     }
     ],
     iva: "",
-    montoTotal: "12bs",
+    montoTotal: "46bs",
     fecha: "23/7/2025",
 
 }];
