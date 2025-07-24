@@ -383,15 +383,32 @@ if ($buttonFactura) {
 
 let $buttonPorCobrar = document.querySelector("#buttonPorCobrar");
 $buttonPorCobrar.addEventListener("click", (e) => {
-    const fechaActual = new Date();
-    const dia = fechaActual.getDate();
-    const mes = fechaActual.getMonth() + 1; // Los meses empiezan desde 0
-    const anio = fechaActual.getFullYear();
+
+   function calcularVencimiento(fechaBase, dias) {
+  let fecha = new Date(fechaBase); // Clona la fecha para no modificar la original
+  fecha.setDate(fecha.getDate() + dias);
+  return fecha;
+}
+const fechaActual = new Date();
+const dia = fechaActual.getDate();
+const mes = fechaActual.getMonth() + 1; // Los meses empiezan desde 0
+const anio = fechaActual.getFullYear();
+let vencimiento15 = calcularVencimiento(fechaActual, 15);
+let vencimiento30 = calcularVencimiento(fechaActual, 30);
+
 
     if ($condition.value === "15-dias" || $condition.value === "30-dias" && cart && clienteActual) {
         facturaActual = { ...clienteActual };
         facturaActual.articulos = [...cart];
         facturaActual.fecha = `${dia}/${mes}/${anio}`;
+        facturaActual.montoTotal = cart.reduce((acum, item) => acum + item.precioTotal, 0);
+        if($condition.value === "15-dias"){
+            facturaActual.vencimiento = vencimiento15.toLocaleDateString('es-VE')
+        }else{
+            facturaActual.vencimiento = vencimiento30.toLocaleDateString('es-VE')
+
+        }
+        facturaActual.estado = "Pendiente"
         BDPorCobrar.push(facturaActual);
         
         localStorage.setItem("BDPorCobrar", JSON.stringify(BDPorCobrar, null, 2));
