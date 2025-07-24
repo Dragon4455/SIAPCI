@@ -10,27 +10,6 @@
     font-family: 'Nunito';
 }
 
-#Inv__Search{
-    display: grid;
-    gap: 30px;
-    padding: 20px;
-    background-color: aliceblue;
-    width: 210px;
-    height: 400px;
-    overflow-y: scroll;
-    position:relative;
-    outline: 2px solid black;
-    scrollbar-color: rgb(171, 226, 240) whitesmoke; 
-    text-align: justify;
-}
-
-#Inv__Search>div{
-    background-color:aliceblue;
-}
-
-#Inv__Search >div:hover{
-    color: aqua;
-}
 
 #Inv__Over{
     position: relative;
@@ -44,14 +23,14 @@
 }
 
 #Inv__Buttons{
-
+    
     display: grid;
     grid-template-columns: 150px 120px;
     margin-left: 15px;
 }
 
 #Inv__Buttons > button{
-
+    
     width: 100px;
     height: 30px;
     margin-top: 2px;
@@ -59,13 +38,147 @@
 }
 
 #modal__Add{
-    display: block;
+    display: none;
     position: fixed;
     bottom: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    border: 3px solid #f1f1f1;
     z-index: 9;
+    opacity: 1;
+}
+
+.modal > div{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: justify;
+    padding-bottom: 35vh;
+}
+
+.modal > div > input{
+    padding: 10px;
+}
+
+#modal__Edit{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    z-index: 9;
+    opacity: 1;
+}
+
+#modal__Del{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    z-index: 9;
+    opacity: 1;
+}
+
+#modal__Save{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    z-index: 9;
+    opacity: 1;
+}
+
+.modal{
+    
+    background-color: #f1f1f1;
+    border: 3px solid #000000;
+}
+
+.inv__guide {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    border-bottom: 2px solid #7fb3d5;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    background: #eaf6fb;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+.inv__col {
+    width: 33%;
+    text-align: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.inv__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-right: 10px;
+    border-bottom: 1px solid #b3c6d6;
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.inv__name {
+    width: 33%;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.inv__qty {
+    width: 33%;
+    text-align: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.inv__circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.inv__circle--green {
+    background-color: #3ecf4c;
+    border: 2px solid #1a7c2e;
+}
+
+.inv__circle--red {
+    background-color: #e74c3c;
+    border: 2px solid #a8231a;
+}
+#Inv__Search{
+    display: grid;
+    gap: 30px;
+    padding: 20px;
+    background-color: aliceblue;
+    width: 260px;
+    height: 400px;
+    overflow-y: scroll;
+    position:relative;
+    outline: 2px solid black;
+    scrollbar-color: rgb(171, 226, 240) whitesmoke; 
+    text-align: justify;
+}
+
+#Inv__Search>div{
+    background-color:aliceblue;
 }

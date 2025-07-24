@@ -27,34 +27,138 @@
 
     <article class="Inv__Main">
         <div id="Inv__Search">
-
-            <p></p>
-           
+            <div class="inv__guide">
+                <span class="inv__col">Nombre</span>
+                <span class="inv__col">Cantidad</span>
+                <span class="inv__col">Stock</span>
+            </div>
+            <div class="inv__item">
+                <span class="inv__name">Lapiz</span>
+                <span class="inv__qty">8</span>
+                <span class="inv__circle inv__circle--green"></span>
+            </div>
+            <div class="inv__item">
+                <span class="inv__name">Hojas</span>
+                <span class="inv__qty">3</span>
+                <span class="inv__circle inv__circle--red"></span>
+            </div>
+            <div class="inv__item">
+                <span class="inv__name">Borradores</span>
+                <span class="inv__qty">12</span>
+                <span class="inv__circle inv__circle--green"></span>
+            </div>
         </div>
         
-        <div id="Inv__Over">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, corporis facilis quo tempora dolore n</div>
+        <div id="Inv__Over">seleccione una categoria...</div>
         
     </article>
+
     <div id="Inv__Buttons">
-        <button id="add">
+        <button id="add" onclick="addOpen()">
             AÑADIR
         </button>
-        <button id="edit">
+        <button id="edit" onclick="editOpen()">
             EDITAR
         </button>
-        <button id="del">
+        <button id="del"
+        onclick="delOpen()">
             ELIMINAR
-        </button>
-        <button id="save">
-            GUARDAR
         </button>
     </div>
 
-    <article id="modal__Add">
+    
 
-        <p>TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST</p>
+    <article class="modal" id="modal__Add">
+
+
+        <div>
+
+            <form>
+                <label>Nombre</label>
+                <input type="text" id="productName">
+                <br>
+                <label>Cantidad</label>
+                <input type="text" id="productQuant">
+                <br>
+                <label>Fecha de Compra</label>
+                <input type="date" id="productDate">
+                <br>
+                <label>Proveedores</label>
+                <input type="text" id="productProv">
+            </form>
+
+
+        </div>
+        
 
         <button id="Add__Close" onclick="addClose()">Cerrar</button>
+        <button id="save" onclick="saveClose()">GUARDAR</button>
+
+    </article>
+
+
+    <article class="modal" id="modal__Edit">
+
+         <div>
+
+            <form>
+                <label>Producto a Editar</label>
+                <select id="edit__Opts">
+
+                    <option>sandwich</option>
+                    <option>pollo</option>
+
+                </select>
+                <br>
+                <label>Cantidad</label>
+                <input type="text" id="productEdit__Quant">
+                <br>
+                <label>Fecha de Compra</label>
+                <input type="date" id="productEdit__Date">
+                <br>
+                <label>Proveedores</label>
+                <input type="text" id="productEdit__Prov">
+            </form>
+
+
+        </div>
+        
+
+        <button id="Edit__Close" onclick="editClose()">Cerrar</button>
+        <button id="save" onclick="saveClose()">GUARDAR</button>
+        
+    </article>
+
+    <article class="modal" id="modal__Del">
+
+         <div>
+
+            <form>
+             <label>Producto a Eliminar</label>
+                <select id="del__Opts">
+
+                    <option>sandwich</option>
+                    <option>pollo</option>
+
+                </select>
+                <br>
+                <label>Cantidad</label>
+                <input type="text" id="Del__Quant">
+                <br>
+                <label>Fecha de Compra</label>
+                <input type="date" id="Del__Date">
+                <br>
+                <label>Proveedores</label>
+                <input type="text" id="Del__Prov">
+            </form>
+
+
+        </div>
+        
+
+        <button id="delClose"
+        onclick="delClose()">Cerrar</button>
+        <button id="save" onclick="saveClose()">GUARDAR</button>
 
     </article>
 
