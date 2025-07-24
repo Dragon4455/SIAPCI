@@ -38,22 +38,32 @@ let BDProducto = [{
        precioTotal: this.precio,
 }];
 let BDFactura = [{
-     nombre: "Neomar",
+    nombre: "Neomar",
     direccion: "San Esteban",
     tlf: "12345",
     rif: "31325616",
     metodo: "Pago movil",
     condicion: "contado",
-    nroFactura: "0001",
+    nroFactura: "001",
     articulos: [{
         nombre: "Hoja",
         cantidad: 2,
         precio: 3,
         precioTotal: 6,
 
-}],
+},
+{
+        nombre: "Hoja",
+        cantidad: 2,
+        precio: 3,
+        precioTotal: 6,
+
+}
+],
     iva: "",
-    montoTotal: "30bs",
+    montoTotal: "6bs",
+    fecha: "23/7/2025",
+
 }];
 
 

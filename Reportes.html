@@ -25,4 +25,270 @@
         <a href="index.html" class="menu__link">Salir</a>
     </nav>
 
+    <div class="reportes__botones">
+        <button id="ventasBtn" class="reporte-btn">Reporte de Ventas</button>
+        <button id="facturasBtn" class="reporte-btn">Reporte de Facturas</button>
+        <button id="inventarioBtn" class="reporte-btn">Reporte de Inventario</button>
+    </div>
+
+    <!-- Modal Ventas -->
+    <div id="ventasModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="ventasModal">&times;</span>
+            <h2>Reporte de Ventas</h2>
+            <div class="custom-table" id="ventasTable">
+                <div class="custom-table-header">
+                    <div>Fecha</div>
+                    <div>Nro de Venta</div>
+                    <div>Descripción del Producto</div>
+                    <div>Cantidad</div>
+                    <div>Precio Unitario</div>
+                    <div>Precio Total</div>
+                    <div>Total de la Venta</div>
+                    <div>Forma de Pago</div>
+                </div>
+                <!-- Las filas se generan dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Facturas -->
+    <div id="facturasModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="facturasModal">&times;</span>
+            <h2>Reporte de Facturas</h2>
+            <div class="custom-table">
+                <div class="custom-table-header">
+                    <div>No. Factura</div>
+                    <div>Fecha Emisión</div>
+                    <div>Nombre Cliente</div>
+                    <div>RIF/C.I. Cliente</div>
+                    <div>Total Factura</div>
+                    <div>Monto IVA</div>
+                    <div>Subtotal General</div>
+                    <div>Forma de Pago</div>
+                    <div>Estatus de Pago</div>
+                </div>
+                <div class="custom-table-row">
+                    <div>F001</div>
+                    <div>01/06/2024</div>
+                    <div>Juan Pérez</div>
+                    <div>V-12345678</div>
+                    <div>100.00</div>
+                    <div>16.00</div>
+                    <div>84.00</div>
+                    <div>Transferencia</div>
+                    <div>Pendiente</div>
+                </div>
+                <!-- Más filas aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Inventario -->
+    <div id="inventarioModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="inventarioModal">&times;</span>
+            <h2>Reporte de Inventario</h2>
+            <div class="custom-table">
+                <div class="custom-table-header">
+                    <div>Código/SKU</div>
+                    <div>Nombre del Producto</div>
+                    <div>Cantidad en Stock</div>
+                    <div>Precio Costo Unitario</div>
+                    <div>Precio Venta Unitario</div>
+                    <div>Nivel de Reorden</div>
+                </div>
+                <div class="custom-table-row">
+                    <div>SKU001</div>
+                    <div>Producto A</div>
+                    <div>50</div>
+                    <div>5.00</div>
+                    <div>10.00</div>
+                    <div>10</div>
+                </div>
+                <!-- Más filas aquí -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .reportes__botones {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .reporte-btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background: #2d6cdf;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .reporte-btn:hover {
+            background: #1a4fa0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+        }
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            color: #888;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #2d6cdf;
+        }
+        .custom-table {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+        .custom-table-header, .custom-table-row {
+            display: grid;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        /* Column templates for each table */
+        #ventasModal .custom-table-header,
+        #ventasModal .custom-table-row {
+            grid-template-columns: repeat(8, 1fr);
+        }
+        #facturasModal .custom-table-header,
+        #facturasModal .custom-table-row {
+            grid-template-columns: repeat(9, 1fr);
+        }
+        #inventarioModal .custom-table-header,
+        #inventarioModal .custom-table-row {
+            grid-template-columns: repeat(6, 1fr);
+        }
+        .custom-table-header {
+            font-weight: bold;
+            background: #f0f4fa;
+            border-bottom: 2px solid #2d6cdf;
+        }
+        .custom-table-row {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .custom-table-row:last-child {
+            border-bottom: none;
+        }
+        .custom-table-row > div, .custom-table-header > div {
+            padding: 0.5rem;
+            text-align: center;
+            word-break: break-word;
+        }
+        @media (max-width: 700px) {
+            .modal-content {
+                padding: 1rem;
+            }
+            .custom-table-header, .custom-table-row {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
+    <script>
+        let JsonFacturas = localStorage.getItem("BDFactura");
+        let BDFacturas = JSON.parse(JsonFacturas) || [];
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            const modals = {
+                ventasModal: document.getElementById('ventasModal'),
+                facturasModal: document.getElementById('facturasModal'),
+                inventarioModal: document.getElementById('inventarioModal')
+            };
+
+            document.getElementById('ventasBtn').addEventListener('click', function() {
+               
+                generarTablaVentas();
+                modals.ventasModal.style.display = 'block';
+            });
+            document.getElementById('facturasBtn').addEventListener('click', function() {
+                modals.facturasModal.style.display = 'block';
+            });
+            document.getElementById('inventarioBtn').addEventListener('click', function() {
+                modals.inventarioModal.style.display = 'block';
+            });
+
+            document.querySelectorAll('.close').forEach(function(span) {
+                span.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-modal');
+                    modals[modalId].style.display = 'none';
+                });
+            });
+
+            window.addEventListener('click', function(event) {
+                Object.values(modals).forEach(function(modal) {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+
+            function generarTablaVentas() {
+                const ventasTable = document.getElementById('ventasTable');
+                // Elimina filas previas
+                ventasTable.querySelectorAll('.custom-table-row').forEach(row => row.remove());
+
+                if (!Array.isArray(BDFacturas)){
+                   
+                    return;
+                    
+                }else{
+                    
+                    BDFacturas.forEach((factura, idx) => {
+                        
+                       
+
+                            let totalVenta = parseFloat(factura.montoTotal) || 0;
+                           
+                            factura.articulos.forEach(item => {
+                              
+                                const row = document.createElement('div');
+                                row.className = 'custom-table-row';
+                                row.innerHTML = `
+                                    <div>${factura.fecha || ''}</div>
+                                    <div>${factura.nroFactura || idx + 1}</div>
+                                    <div>${item.nombre || ''}</div>
+                                    <div>${item.cantidad || ''}</div>
+                                    <div>${item.precio != null ? Number(item.precio).toFixed(2) : ''}</div>
+                                    <div>${item.precioTotal != null ? Number(item.precioTotal).toFixed(2) : ''}</div>
+                                    <div>${totalVenta != null ? Number(totalVenta).toFixed(2) : ''}</div>
+                                    <div>${factura.metodo || ''}</div>
+                                `;
+                                ventasTable.appendChild(row);
+                            });
+                        
+                            
+                    });
+                } 
+                    
+                
+            }
+        });
+    </script>
+    </script>
 </body>

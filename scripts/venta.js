@@ -74,16 +74,16 @@ let facturaActual = "";
 
 let cart = [];
 
-let producto ={
-        nombre: "Pega",
-        cantidad:1,
-        codigo: "12345",
-        precio: 20,
+let producto = {
+    nombre: "Pega",
+    cantidad: 1,
+    codigo: "12345",
+    precio: 20,
 }
 
 //Funciones principales
-function añadirCliente(nombre, direccion,rif,tlf){
-   BDCliente.push({
+function añadirCliente(nombre, direccion, rif, tlf) {
+    BDCliente.push({
         nombre,
         direccion,
         rif,
@@ -91,50 +91,50 @@ function añadirCliente(nombre, direccion,rif,tlf){
     });
     alert("Registro exitoso")
     let nuevojson = JSON.stringify(BDCliente);
-    
+
     localStorage.setItem("BDCliente", nuevojson);
 
     console.log(BDCliente)
 }
 
 //Funciones de busqueda 
-function buscarCliente(busqueda){
-    
+function buscarCliente(busqueda) {
+
     let cliente = BDCliente.filter(item => $inputRif.value === item.rif);
-    
-    if(cliente.length){
-        if(busqueda){
+
+    if (cliente.length) {
+        if (busqueda) {
             return true;
         }
         $inputNomCli.value = cliente[0].nombre;
         $inputDir.value = cliente[0].direccion;
         $inputTel.value = cliente[0].tlf;
         clienteActual = cliente[0]
-        
-    } else{ 
-        if(busqueda){
+
+    } else {
+        if (busqueda) {
             return false
         }
         alert("No encontrado");
     }
 }
-function buscarProducto(busqueda){
-    
+function buscarProducto(busqueda) {
+
     let producto = BDProducto.filter(item => $inputCod.value === item.codigo);
-    
-    if(producto.length){
-        if(busqueda){
+
+    if (producto.length) {
+        if (busqueda) {
             return true;
         }
         $inputNomArt.value = producto[0].nombre;
-        $inputPrec.value =  producto[0].precio ;
-        $inputCan.value =   $inputCan.value || 1;
-        producto[0].precioTotal =  producto[0].precio * $inputCan.value || producto[0].precio
+        $inputPrec.value = producto[0].precio;
+        $inputCan.value = $inputCan.value || 1;
+        producto[0].precioTotal = producto[0].precio * $inputCan.value || producto[0].precio
         producto[0].cantidad = $inputCan.value;
         articuloActual = producto[0];
-       console.log(articuloActual)
-    } else{ 
-        if(busqueda){
+        console.log(articuloActual)
+    } else {
+        if (busqueda) {
             return false
         }
         alert("No encontrado");
@@ -142,21 +142,21 @@ function buscarProducto(busqueda){
 }
 
 //Registro de cliente
-function registrarCliente(){
-    if(!buscarCliente(true)){
+function registrarCliente() {
+    if (!buscarCliente(true)) {
         console.log("Hola");
         let nombre = $inputNomCli.value,
             direccion = $inputDir.value,
             rif = $inputRif.value,
             tlf = $inputTel.value;
-            if(nombre && direccion && rif && tlf){
-                console.log(nombre)
-                añadirCliente(nombre,direccion,rif,tlf);
-                buscarCliente();
-            } else{
-                alert("Debes Ingresar toda la información")
-            }
-    } else{
+        if (nombre && direccion && rif && tlf) {
+            console.log(nombre)
+            añadirCliente(nombre, direccion, rif, tlf);
+            buscarCliente();
+        } else {
+            alert("Debes Ingresar toda la información")
+        }
+    } else {
         alert("El usuario ingresado ya existe")
     }
 }
@@ -165,47 +165,47 @@ function registrarCliente(){
 //Eventos de los botones de cliente y productos
 
 let $inputNomCli = document.querySelector("#nombreCliente"),
-$inputRif = document.querySelector("#rifCliente"),
-$inputDir = document.querySelector("#dirCliente"),
-$inputTel = document.querySelector("#telCliente"),
-$btnBusCliente = document.querySelector("#btnBusCliente"),
-$btnRegCliente = document.querySelector("#btnRegCliente");
+    $inputRif = document.querySelector("#rifCliente"),
+    $inputDir = document.querySelector("#dirCliente"),
+    $inputTel = document.querySelector("#telCliente"),
+    $btnBusCliente = document.querySelector("#btnBusCliente"),
+    $btnRegCliente = document.querySelector("#btnRegCliente");
 
-if($inputRif && $inputRif && $inputDir && $inputTel && $btnBusCliente && $btnRegCliente){
-    
-    $inputRif.addEventListener("submit", (e)=>{
+if ($inputRif && $inputRif && $inputDir && $inputTel && $btnBusCliente && $btnRegCliente) {
+
+    $inputRif.addEventListener("submit", (e) => {
         e.preventDefault();
         buscarCliente();
     })
-    $btnBusCliente.addEventListener("click", (e)=>{
+    $btnBusCliente.addEventListener("click", (e) => {
         e.preventDefault();
         buscarCliente();
     });
-    $btnRegCliente.addEventListener("click", (e)=>{
+    $btnRegCliente.addEventListener("click", (e) => {
         e.preventDefault();
         registrarCliente();
     })
 }
 
 let $inputNomArt = document.querySelector("#nomArt"),
-$inputCod = document.querySelector("#codArt"),
-$inputCan = document.querySelector("#canArt"),
-$inputPrec = document.querySelector("#preArt"),
-$btnArt = document.querySelector("#btnArt");
-if($btnArt && $inputCan){
-    
-    $btnArt.addEventListener("click", (e)=>{
+    $inputCod = document.querySelector("#codArt"),
+    $inputCan = document.querySelector("#canArt"),
+    $inputPrec = document.querySelector("#preArt"),
+    $btnArt = document.querySelector("#btnArt");
+if ($btnArt && $inputCan) {
+
+    $btnArt.addEventListener("click", (e) => {
         e.preventDefault();
         buscarProducto();
         // if($inputNomArt.value === producto.nombre){
-            //      $inputCod.value = producto.codigo;
-            //      $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
-            
-            // }
-            
-        }
+        //      $inputCod.value = producto.codigo;
+        //      $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
+
+        // }
+
+    }
     );
-    $inputCan.addEventListener("submit", (e)=>{
+    $inputCan.addEventListener("submit", (e) => {
         e.preventDefault()
         $inputPrec.value = parseInt($inputCan.value) * parseInt(producto.precio);
     })
@@ -214,60 +214,60 @@ if($btnArt && $inputCan){
 //Añadir al carrito de compra
 
 let $cart = document.querySelector("#cart"),
-$btnCart = document.querySelector("#btnAgr");
-if($btnCart){
-    $btnCart.addEventListener("click",(e) =>{
-        if(articuloActual){
+    $btnCart = document.querySelector("#btnAgr");
+if ($btnCart) {
+    $btnCart.addEventListener("click", (e) => {
+        if (articuloActual) {
             let items = ""
             items = document.querySelectorAll(".bill__cart__item");
-            
+
             items.forEach(element => {
-                
+
                 element.remove(element)
             });
-            
-            
-            
+
+
+
             buscarProducto();
             cart.push(articuloActual);
             console.log(cart)
-            
-            cart.forEach((item, index, array)=>{
-                
+
+            cart.forEach((item, index, array) => {
+
                 let contenedor = document.createElement("div");
                 contenedor.classList.add("bill__cart__item");
                 $cart.appendChild(contenedor)
-                
+
                 let itemName = document.createElement("p");
                 itemName.textContent = item.nombre;
                 contenedor.appendChild(itemName);
-                
+
                 let itemCant = document.createElement("p");
                 let cartCant = document.createElement("input");
                 cartCant.value = item.cantidad;
-                cartCant.addEventListener("keydown", (e)=>{
-                    
-                    if(e.key === "Enter"){
+                cartCant.addEventListener("keydown", (e) => {
+
+                    if (e.key === "Enter") {
                         item.precioTotal = item.precio * cartCant.value || item.precio;
                         item.cantidad = cartCant.value || 1;
                         itemPrice.textContent = item.precioTotal;
                         console.log(cart)
                     }
-                })                
-                
+                })
+
                 itemCant.appendChild(cartCant);
                 contenedor.appendChild(itemCant);
-                
+
                 let itemPrice = document.createElement("p");
                 itemPrice.textContent = item.precioTotal;
                 contenedor.appendChild(itemPrice);
-                
+
                 let itemDelete = document.createElement("button");
                 itemDelete.textContent = "Eliminar";
                 itemDelete.classList.add("item__delete")
                 contenedor.appendChild(itemDelete);
-                
-                itemDelete.addEventListener("click",(e)=>{
+
+                itemDelete.addEventListener("click", (e) => {
                     $cart.removeChild(contenedor);
                     let indexToDelete = cart.indexOf(item);
                     console.log(indexToDelete)
@@ -275,42 +275,42 @@ if($btnCart){
                     console.log(cart)
                 })
             })
-            
-            
-            
-        } else{
+
+
+
+        } else {
             alert("Debes buscar un producto para poder agregarlo");
         }
-        
+
     })
-    
+
 }
 
 
 //Selecionar metodo de pago
 
 let $checkMovil = document.querySelector("#movil"),
-$checkTransfer = document.querySelector("#transferencia"),
-$checkDivisa = document.querySelector("#divisa"),
-$checkEfectivo = document.querySelector("#efectivo"),
-$contenedorMetodos = document.querySelector("methodContainer");
+    $checkTransfer = document.querySelector("#transferencia"),
+    $checkDivisa = document.querySelector("#divisa"),
+    $checkEfectivo = document.querySelector("#efectivo"),
+    $contenedorMetodos = document.querySelector("methodContainer");
 
-$checkDivisa.addEventListener("change", (e)=>{
+$checkDivisa.addEventListener("change", (e) => {
 
 });
 
 // Seleccionar condición de pago
 let $condition = document.querySelector("#condition");
 
-$condition.addEventListener("change", (e)=>{
+$condition.addEventListener("change", (e) => {
     console.log(e.target.value)
-    if(e.target.value === "15-dias" || e.target.value === "30-dias"){
+    if (e.target.value === "15-dias" || e.target.value === "30-dias") {
         $checkTransfer.disabled = true;
         $checkDivisa.disabled = true;
         $checkEfectivo.disabled = true;
         $checkMovil.disabled = true;
-        
-    }else{
+
+    } else {
         $checkTransfer.disabled = false;
         $checkDivisa.disabled = false;
         $checkEfectivo.disabled = false;
@@ -326,63 +326,76 @@ let metodos = [];
 
 
 
-if($buttonFactura){
-    
-    $buttonFactura.addEventListener("click", (e)=>{
+if ($buttonFactura) {
+
+    $buttonFactura.addEventListener("click", (e) => {
         e.preventDefault();
-        
-        if(cart && clienteActual && $checkDivisa.checked){
+
+        if (cart && clienteActual && $checkDivisa.checked) {
             metodos.push("Divisa");
-            
-        } 
-        if(cart && clienteActual && $checkEfectivo.checked){
+
+        }
+        if (cart && clienteActual && $checkEfectivo.checked) {
             metodos.push("Efectivo");
-        } 
-        if(cart && clienteActual && $checkMovil.checked){
+        }
+        if (cart && clienteActual && $checkMovil.checked) {
             metodos.push("Pago Movil");
-        } 
-        if(cart && clienteActual && $checkTransfer.checked){
+        }
+        if (cart && clienteActual && $checkTransfer.checked) {
             metodos.push("Transferencia");
-        } 
-        
-        if(cart && clienteActual && metodos){
-            if(!clienteActual.condicion){
-                 clienteActual.condicion = "Contado";
-            
-             }
+        }
+
+        if (cart && clienteActual && metodos) {
+            if (!clienteActual.condicion) {
+                clienteActual.condicion = "Contado";
+
+            }
+            const fechaActual = new Date();
+            const dia = fechaActual.getDate();
+            const mes = fechaActual.getMonth() + 1; // Los meses empiezan desde 0
+            const anio = fechaActual.getFullYear();
             console.log(metodos)
-                     clienteActual.metodo = metodos.join(", ");
-                    metodos = [];
-                    facturaActual = {...clienteActual};
-                    facturaActual.articulos = [...cart];
-                    facturaActual.nroFactura = String(BDFactura.length + 1).padStart(3, '0');
-                    BDFactura.push(facturaActual);
-                     alert("Hola");
-                     localStorage.setItem("cliente", JSON.stringify(clienteActual, null, 2));
-                     localStorage.setItem("productos", JSON.stringify(cart, null, 2));
-                     localStorage.setItem("bdfacturas", JSON.stringify(BDFactura, null, 2));
-                     console.log(clienteActual)
-                     window.location.href = "factura.html";
-                     
-                     
-                     
-                 } else{
-                     alert("Debes ingresar toda la información")
-                 }
-             })
-         }
+            clienteActual.metodo = metodos.join(", ");
+            metodos = [];
+            facturaActual = { ...clienteActual };
+            facturaActual.articulos = [...cart];
+            facturaActual.nroFactura = String(BDFactura.length + 1).padStart(3, '0');
+            facturaActual.fecha = `${dia}/${mes}/${anio}`;
+            BDFactura.push(facturaActual);
+
+            alert("Hola");
+            localStorage.setItem("cliente", JSON.stringify(clienteActual, null, 2));
+            localStorage.setItem("productos", JSON.stringify(cart, null, 2));
+            localStorage.setItem("BDFactura", JSON.stringify(BDFactura, null, 2));
+            console.log(clienteActual)
+            window.location.href = "factura.html";
+
+
+
+        } else {
+            alert("Debes ingresar toda la información")
+        }
+    })
+}
 
 
 //Añadir Factura por cobrar
 
 let $buttonPorCobrar = document.querySelector("#buttonPorCobrar");
-$buttonPorCobrar.addEventListener("click", (e)=>{
-   if($condition.value === "15-dias" || $condition.value === "30-dias" && cart && clienteActual){
-    facturaActual = {...clienteActual};
-    facturaActual.articulos = [...cart];
-    BDPorCobrar.push(facturaActual);
-     localStorage.setItem("BDPorCobrar", JSON.stringify(BDPorCobrar, null, 2));
-   } else{
-    alert("Debes establecer una condicion d pago de 15 o 30 días");
-   }
+$buttonPorCobrar.addEventListener("click", (e) => {
+    const fechaActual = new Date();
+    const dia = fechaActual.getDate();
+    const mes = fechaActual.getMonth() + 1; // Los meses empiezan desde 0
+    const anio = fechaActual.getFullYear();
+
+    if ($condition.value === "15-dias" || $condition.value === "30-dias" && cart && clienteActual) {
+        facturaActual = { ...clienteActual };
+        facturaActual.articulos = [...cart];
+        facturaActual.fecha = `${dia}/${mes}/${anio}`;
+        BDPorCobrar.push(facturaActual);
+        
+        localStorage.setItem("BDPorCobrar", JSON.stringify(BDPorCobrar, null, 2));
+    } else {
+        alert("Debes establecer una condicion d pago de 15 o 30 días");
+    }
 })
