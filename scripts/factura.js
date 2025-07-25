@@ -1,3 +1,6 @@
+const facturas = localStorage.getItem("BDFactura");
+const facturaActual = JSON.stringify(facturas);
+
 const $editBtn = document.getElementById('edit');
 const $closeEditBtn = document.getElementById('closeEdit');
 const $saveEditBtn = document.getElementById('saveEdit');
@@ -43,17 +46,17 @@ $saveEditBtn.addEventListener('click', (e) => {
 
 function editarDatos() {
 
-    $inptNombCli.value = nombCli.textContent;
-   //
-
-    nombCli.textContent = $inptNombCli.value;
-    rifCli.textContent = $inptRifCli.value;
-    dirCli.textContent = $inptDirCli.value;
-    telCli.textContent = $inptTelCli.value;
-    numFac.textContent = $inptNumFac.value;
-    tipPago.textContent = $inptTipPago.value;
-    conPago.textContent = $inptConPago.value;
-
+    //
+    
+    nombCli.textContent = $inptNombCli.value || nombCli.textContent;
+    rifCli.textContent = $inptRifCli.value || rifCli.textContent;
+    dirCli.textContent = $inptDirCli.value || dirCli.textContent;
+    telCli.textContent = $inptTelCli.value || telCli.textContent;
+    numFac.textContent = $inptNumFac.value || numFac.textContent;
+    tipPago.textContent = $inptTipPago.value || tipPago.textContent;
+    conPago.textContent = $inptConPago.value ||conPago.textContent;
+    
+    // $inptNombCli.value = nombCli.textContent;
    
     $inptNombCli.value = '';
     $inptRifCli.value = '';

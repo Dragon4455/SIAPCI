@@ -96,8 +96,7 @@
                 <input type="text" id="Dir">
                  <label>Telefono</label>
                 <input type="text" id="Tlf">
-                 <label>Numero de Factura</label>
-                <input type="text" id="Num__Fact">
+                
                  <label>Tipo de pago</label>
                 <input type="text" id="tip__P">
                  <label>Condicion de Pago</label>
@@ -125,7 +124,7 @@
                     rifCli = document.querySelector("#rifCli"),
                     dirCli = document.querySelector("#dirCli"),
                     telCli = document.querySelector("#telCli"),
-                    numFac = document.querySelector("#numFact"),
+                    
                     tipPago = document.querySelector("#tipPago"),
                     conPago = document.querySelector("#conPago")
 
@@ -133,7 +132,6 @@
                 rifCli.textContent = bdfacturas[codigoFactura].rif;
                 dirCli.textContent =bdfacturas[codigoFactura].direccion;
                telCli.textContent = bdfacturas[codigoFactura].tlf;
-               numFac.textContent = bdfacturas[codigoFactura].nroFactura;
                tipPago.textContent = bdfacturas[codigoFactura].metodo;
                conPago.textContent = bdfacturas[codigoFactura].condicion;
 
@@ -254,8 +252,8 @@
         })
     </script>
 
-    <script src="scripts/factura.js"></script>
     <script src="scripts/anular.js"></script>
+    <script src="scripts/factura.js"></script>
 </body>
 
 </html>
