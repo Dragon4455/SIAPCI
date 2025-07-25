@@ -49,11 +49,19 @@ nav{
     gap: 15px;
 
 }
+.btnCliente{
+    padding: .5rem;
+    background-color: rgb(29, 212, 245);
+
+}
 
 .bill__products__inputs, .bill__cart{
     padding-top: 20px;
     margin-top: 10px;
+}
+.bill__cart{
     border-top: 1px solid rgb(155, 155, 155);
+
 }
 .bill__input{
     display: flex;

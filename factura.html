@@ -77,7 +77,6 @@
     <div id="buttons">
         <button id="print">Imprimir</button>
         <button id="edit">Editar</button>
-        <button id="del">Anular</button>
     </div>
     <article>
 
@@ -88,7 +87,7 @@
 
             const clienteActual = localStorage.getItem("cliente");
             const productos = localStorage.getItem("productos");
-            const facturas = localStorage.getItem("bdfacturas");
+            const facturas = localStorage.getItem("BDFacturas");
             console.log(clienteActual);
             if (clienteActual) {
                 const cliente = JSON.parse(clienteActual);

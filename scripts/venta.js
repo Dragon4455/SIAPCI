@@ -169,7 +169,9 @@ let $inputNomCli = document.querySelector("#nombreCliente"),
     $inputDir = document.querySelector("#dirCliente"),
     $inputTel = document.querySelector("#telCliente"),
     $btnBusCliente = document.querySelector("#btnBusCliente"),
-    $btnRegCliente = document.querySelector("#btnRegCliente");
+    $btnRegCliente = document.querySelector("#btnRegCliente"),
+    $btnEdiCliente = document.querySelector("#btnEdiCliente"),
+    $btnEliCliente = document.querySelector("#btnEliCliente");
 
 if ($inputRif && $inputRif && $inputDir && $inputTel && $btnBusCliente && $btnRegCliente) {
 
