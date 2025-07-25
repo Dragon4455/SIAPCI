@@ -81,6 +81,37 @@
     </div>
     <article>
 
+    <article class="modalEdit">
+
+        <div>
+
+            <form>
+                
+                <label>Nombre del Cliente</label>
+                <input type="text" id="Nombre">
+                <br>
+                <label>RIF</label>
+                <input type="text" id="Rif">
+                 <label>Direccion</label>
+                <input type="text" id="Dir">
+                 <label>Telefono</label>
+                <input type="text" id="Tlf">
+                 <label>Numero de Factura</label>
+                <input type="text" id="Num__Fact">
+                 <label>Tipo de pago</label>
+                <input type="text" id="tip__P">
+                 <label>Condicion de Pago</label>
+                <input type="text" id="con__P">
+
+            </form>
+        
+            <button id="closeEdit">Cerrar</button>
+            <button id="saveEdit">Guardar</button>
+        </div>
+        
+
+    </article>
+
     </article>
     <!-- <script src="/scripts/venta.js"></script> -->
     <script>
@@ -163,6 +194,8 @@
             window.print();
         })
     </script>
+
+    <script src="scripts/factura.js"></script>
 </body>
 
 </html>
