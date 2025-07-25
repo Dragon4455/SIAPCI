@@ -114,23 +114,13 @@
 
     </article>
     <!-- <script src="/scripts/venta.js"></script> -->
-    <script>
+     <script>
         window.onload = function () {
-
-            const clienteActual = localStorage.getItem("cliente");
-            const productos = localStorage.getItem("productos");
-            const facturas = localStorage.getItem("BDFactura");
-            console.log(clienteActual);
-            if (clienteActual) {
-                const cliente = JSON.parse(clienteActual);
-                const cart = JSON.parse(productos);
+            let codigoFactura = localStorage.getItem("facturaABuscar");
+            if(codigoFactura){
+                const facturas = localStorage.getItem("BDFactura");
                 const bdfacturas = JSON.parse(facturas);
-
-    
-               
-
-                console.log(bdfacturas)
-        
+                console.log(bdfacturas[codigoFactura]);
                 let nombCli = document.querySelector("#nombCli"),
                     rifCli = document.querySelector("#rifCli"),
                     dirCli = document.querySelector("#dirCli"),
@@ -139,16 +129,16 @@
                     tipPago = document.querySelector("#tipPago"),
                     conPago = document.querySelector("#conPago")
 
-                nombCli.textContent = cliente.nombre;
-                rifCli.textContent = cliente.rif;
-                dirCli.textContent = cliente.direccion;
-               telCli.textContent = cliente.tlf;
-               numFac.textContent = String(bdfacturas.length).padStart(3, '0');
-               tipPago.textContent = cliente.metodo;
-               conPago.textContent = cliente.condicion;
+                nombCli.textContent = bdfacturas[codigoFactura].nombre;
+                rifCli.textContent = bdfacturas[codigoFactura].rif;
+                dirCli.textContent =bdfacturas[codigoFactura].direccion;
+               telCli.textContent = bdfacturas[codigoFactura].tlf;
+               numFac.textContent = bdfacturas[codigoFactura].nroFactura;
+               tipPago.textContent = bdfacturas[codigoFactura].metodo;
+               conPago.textContent = bdfacturas[codigoFactura].condicion;
 
                let $cart = document.querySelector(".bill__products");
-               console.log(cart)
+               cart = bdfacturas[codigoFactura].articulos;
                 cart.forEach((item, index, )=>{
                 
                 let contenedor = document.createElement("div");
@@ -183,7 +173,76 @@
                 subtotal.textContent = cart.reduce((sum , actual) => sum + actual.precioTotal , 0);
                  iva.textContent = (subtotal.textContent * 0.16).toFixed(2);
                 total.textContent = (+subtotal.textContent + +iva.textContent).toFixed(2);
-                
+            }else{
+
+                const clienteActual = localStorage.getItem("cliente");
+                const productos = localStorage.getItem("productos");
+                const facturas = localStorage.getItem("BDFactura");
+                console.log(clienteActual);
+                if (clienteActual) {
+                    const cliente = JSON.parse(clienteActual);
+                    const cart = JSON.parse(productos);
+                    const bdfacturas = JSON.parse(facturas);
+    
+        
+                   
+    
+                    console.log(bdfacturas)
+            
+                    let nombCli = document.querySelector("#nombCli"),
+                        rifCli = document.querySelector("#rifCli"),
+                        dirCli = document.querySelector("#dirCli"),
+                        telCli = document.querySelector("#telCli"),
+                        numFac = document.querySelector("#numFact"),
+                        tipPago = document.querySelector("#tipPago"),
+                        conPago = document.querySelector("#conPago")
+    
+                    nombCli.textContent = cliente.nombre;
+                    rifCli.textContent = cliente.rif;
+                    dirCli.textContent = cliente.direccion;
+                   telCli.textContent = cliente.tlf;
+                   numFac.textContent = String(bdfacturas.length).padStart(3, '0');
+                   tipPago.textContent = cliente.metodo;
+                   conPago.textContent = cliente.condicion;
+    
+                   let $cart = document.querySelector(".bill__products");
+                   console.log(cart)
+                    cart.forEach((item, index, )=>{
+                    
+                    let contenedor = document.createElement("div");
+        
+                    contenedor.classList.add("bill__product");
+                    $cart.appendChild(contenedor)
+                    
+                    
+                    let itemCant = document.createElement("p");
+                    itemCant.textContent = item.cantidad;
+                    contenedor.appendChild(itemCant);
+                    
+                    let itemName = document.createElement("p");
+                    itemName.textContent = item.nombre;
+                    contenedor.appendChild(itemName);
+                   
+                    
+                    let itemUnitPrice = document.createElement("p");
+                    itemUnitPrice.textContent = item.precio + " Bs";
+                    contenedor.appendChild(itemUnitPrice);
+    
+                    let itemPrice = document.createElement("p");
+                    itemPrice.textContent = item.precioTotal + " Bs";
+                    contenedor.appendChild(itemPrice);
+                    
+                    
+                  
+                });
+                    let subtotal = document.querySelector("#subTotal");
+                    let iva = document.querySelector("#iva");
+                    let total = document.querySelector("#total");
+                    subtotal.textContent = cart.reduce((sum , actual) => sum + actual.precioTotal , 0);
+                     iva.textContent = (subtotal.textContent * 0.16).toFixed(2);
+                    total.textContent = (+subtotal.textContent + +iva.textContent).toFixed(2);
+                    
+                }
             }
 
         }
@@ -196,6 +255,7 @@
     </script>
 
     <script src="scripts/factura.js"></script>
+    <script src="scripts/anular.js"></script>
 </body>
 
 </html>

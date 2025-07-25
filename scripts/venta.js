@@ -313,6 +313,7 @@ if ($buttonFactura) {
             BDFactura.push(facturaActual);
 
             alert("Hola");
+            localStorage.setItem("facturaABuscar", "");
             localStorage.setItem("cliente", JSON.stringify(clienteActual, null, 2));
             localStorage.setItem("productos", JSON.stringify(cart, null, 2));
             localStorage.setItem("BDFactura", JSON.stringify(BDFactura, null, 2));
