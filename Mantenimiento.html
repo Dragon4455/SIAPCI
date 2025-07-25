@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mantenimiento</title>
     <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/inventario.css">
+    <link rel="stylesheet" href="styles/mantenimiento.css">
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
@@ -58,126 +58,6 @@
         </div>
     </div>
 
-    <style>
-        .mantenimiento-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 60px 0;
-        }
-        .big-btn {
-            font-size: 1.5rem;
-            padding: 30px 60px;
-            border-radius: 12px;
-            border: none;
-            background: #1976d2;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .big-btn:hover {
-            background: #125ea7;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            overflow: auto;
-            background: rgba(0,0,0,0.4);
+    <script src="scripts/mantenimiento.js"></script>
 
-         
-           
-            align-items: center;
-            justify-content: center;
-        }
-    
-        .modal-content {
-            background: #fff;
-            padding: 30px 40px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin: 0;
-        }
-        .close {
-            position: absolute;
-            right: 18px;
-            top: 12px;
-            font-size: 2rem;
-            color: #888;
-            cursor: pointer;
-        }
-        input, select {
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-        button#confirmarUsuario, button#confirmarRespaldo {
-            background: #388e3c;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 0;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button#confirmarUsuario:hover, button#confirmarRespaldo:hover {
-            background: #256029;
-        }
-        label {
-            font-weight: 600;
-        }
-    </style>
-    <script>
-        // Modal logic
-        const btnUsuario = document.getElementById('btnUsuario');
-        const btnRespaldo = document.getElementById('btnRespaldo');
-        const modalUsuario = document.getElementById('modalUsuario');
-        const modalRespaldo = document.getElementById('modalRespaldo');
-        const closeUsuario = document.getElementById('closeUsuario');
-        const closeRespaldo = document.getElementById('closeRespaldo');
-
-        btnUsuario.onclick = () => modalUsuario.style.display = 'flex';
-        btnRespaldo.onclick = () => modalRespaldo.style.display = 'flex';
-        closeUsuario.onclick = () => modalUsuario.style.display = 'none';
-        closeRespaldo.onclick = () => modalRespaldo.style.display = 'none';
-
-        window.onclick = function(event) {
-            if (event.target == modalUsuario) modalUsuario.style.display = "none";
-            if (event.target == modalRespaldo) modalRespaldo.style.display = "none";
-        }
-
-        document.getElementById('confirmarUsuario').onclick = function() {
-            const usuario = document.getElementById('nuevoUsuario').value;
-            const contrasena = document.getElementById('nuevaContrasena').value;
-            if (!usuario || !contrasena) {
-                alert('Por favor, complete ambos campos.');
-                return;
-            }
-            if (confirm('¿Está seguro de agregar este usuario?')) {
-                // Aquí iría la lógica para guardar el usuario
-                alert('Usuario agregado correctamente.');
-                modalUsuario.style.display = 'none';
-            }
-        };
-
-        document.getElementById('confirmarRespaldo').onclick = function() {
-            const dias = document.getElementById('diasRespaldo').value;
-            if (confirm(`¿Está seguro de establecer el respaldo cada ${dias} días?`)) {
-                // Aquí iría la lógica para establecer el respaldo
-                alert('Respaldo configurado correctamente.');
-                modalRespaldo.style.display = 'none';
-            }
-        };
-    </script>
 </body>

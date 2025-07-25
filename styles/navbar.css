@@ -1,6 +1,6 @@
 :root {
     --mainFont: "Nunito", sans-serif;
-    --mainColor: rgb(207, 243, 255)
+    --mainColor: rgb(207, 243, 255);
 }
 
 body{
@@ -8,6 +8,7 @@ body{
     align-content: center;
     background-image: url("../images/fondo-global.png");
     background-size: cover;
+    font-family: var(--mainFont);
 }
 
 
@@ -16,7 +17,6 @@ h1{
 }
 
 .menu__title{
-    font-family: 'Times New Roman';
     background-color: whitesmoke;
     margin: .1px;
     padding: 10px;
