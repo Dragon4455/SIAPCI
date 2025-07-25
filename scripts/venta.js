@@ -361,7 +361,8 @@ if ($buttonFactura) {
             metodos = [];
             facturaActual = { ...clienteActual };
             facturaActual.articulos = [...cart];
-            facturaActual.nroFactura = String(BDFactura.length + 1).padStart(3, '0');
+            clienteActual.nroFactura = String(BDFactura.length + 1).padStart(3, '0');
+           facturaActual.nroFactura = String(BDFactura.length + 1).padStart(3, '0');
             facturaActual.fecha = `${dia}/${mes}/${anio}`;
             BDFactura.push(facturaActual);
 
