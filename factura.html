@@ -103,7 +103,9 @@
                 <input type="text" id="con__P">
 
             </form>
-        
+            <div class="articulos">
+
+            </div>
             <button id="closeEdit">Cerrar</button>
             <button id="saveEdit">Guardar</button>
         </div>
@@ -204,7 +206,6 @@
                    conPago.textContent = cliente.condicion;
     
                    let $cart = document.querySelector(".bill__products");
-                   console.log(cart)
                     cart.forEach((item, index, )=>{
                     
                     let contenedor = document.createElement("div");
@@ -245,6 +246,228 @@
 
         }
 
+        //Editar factura
+        const $editBtn = document.getElementById('edit');
+const $closeEditBtn = document.getElementById('closeEdit');
+const $saveEditBtn = document.getElementById('saveEdit');
+ let nombCli = document.querySelector("#nombCli"),
+    rifCli = document.querySelector("#rifCli"),
+    dirCli = document.querySelector("#dirCli"),
+    telCli = document.querySelector("#telCli"),
+    numFac = document.querySelector("#numFact"),
+    tipPago = document.querySelector("#tipPago"),
+    conPago = document.querySelector("#conPago");
+ let $inptNombCli = document.querySelector("#Nombre"),
+    $inptRifCli = document.querySelector("#Rif"),
+    $inptDirCli = document.querySelector("#Dir"),
+    $inptTelCli = document.querySelector("#Tlf"),
+    $inptNumFac = document.querySelector("#Num__Fact"),
+    $inptTipPago = document.querySelector("#tip__P"),
+    $inptConPago = document.querySelector("#con__P");
+    const articulosContainer = document.querySelector('.articulos');
+
+    // Mostrar artículos en el modal de edición
+    function mostrarArticulosEnModal(cart) {
+        articulosContainer.innerHTML = '';
+        cart.forEach((item, idx) => {
+            const div = document.createElement('div');
+            div.classList.add('articulo-edit');
+            div.innerHTML = `
+                <label>Cantidad:</label>
+                <input type="number" min="1" value="${item.cantidad}" data-idx="${idx}" class="edit-cantidad">
+                <label>Nombre:</label>
+                <input type="text" value="${item.nombre}" data-idx="${idx}" class="edit-nombre">
+                <label>Precio Unitario:</label>
+                <input type="number" min="0" step="0.01" value="${item.precio}" data-idx="${idx}" class="edit-precio">
+            `;
+            articulosContainer.appendChild(div);
+        });
+    }
+
+    // Llenar el modal con los datos actuales al abrirlo
+    $editBtn.addEventListener('click', () => {
+        if (cart && Array.isArray(cart)) {
+            mostrarArticulosEnModal(cart);
+            // Llenar los inputs del modal con los datos actuales
+            $inptNombCli.value = nombCli.textContent;
+            $inptRifCli.value = rifCli.textContent;
+            $inptDirCli.value = dirCli.textContent;
+            $inptTelCli.value = telCli.textContent;
+            $inptTipPago.value = tipPago.textContent;
+            $inptConPago.value = conPago.textContent;
+            // numFac solo si existe el input
+            if ($inptNumFac) $inptNumFac.value = numFac.textContent;
+        }
+    });
+
+    // Guardar cambios en los artículos
+    function editarArticulos() {
+        const cantidadInputs = document.querySelectorAll('.edit-cantidad');
+        const nombreInputs = document.querySelectorAll('.edit-nombre');
+        const precioInputs = document.querySelectorAll('.edit-precio');
+        cantidadInputs.forEach((input, idx) => {
+            cart[idx].cantidad = Number(input.value);
+        });
+        nombreInputs.forEach((input, idx) => {
+            cart[idx].nombre = input.value;
+        });
+        precioInputs.forEach((input, idx) => {
+            cart[idx].precio = Number(input.value);
+            cart[idx].precioTotal = cart[idx].cantidad * cart[idx].precio;
+        });
+        // Actualizar en localStorage si corresponde
+        localStorage.setItem("productos", JSON.stringify(cart));
+        // Si la factura existe en BDFactura, actualizarla también
+        let codigoFactura = localStorage.getItem("facturaABuscar");
+        if (codigoFactura && bdfacturas[codigoFactura]) {
+            bdfacturas[codigoFactura].articulos = cart;
+            // Actualizar también los datos del cliente si fueron editados
+            bdfacturas[codigoFactura].nombre = $inptNombCli.value || nombCli.textContent;
+            bdfacturas[codigoFactura].rif = $inptRifCli.value || rifCli.textContent;
+            bdfacturas[codigoFactura].direccion = $inptDirCli.value || dirCli.textContent;
+            bdfacturas[codigoFactura].tlf = $inptTelCli.value || telCli.textContent;
+            bdfacturas[codigoFactura].metodo = $inptTipPago.value || tipPago.textContent;
+            bdfacturas[codigoFactura].condicion = $inptConPago.value || conPago.textContent;
+            console.log(bdfacturas)
+            localStorage.setItem("BDFactura", JSON.stringify(bdfacturas));
+        }
+    }
+
+    // Modificar editarDatos para incluir edición de artículos y actualizar todos los datos
+    function editarDatos() {
+        nombCli.textContent = $inptNombCli.value || nombCli.textContent;
+        rifCli.textContent = $inptRifCli.value || rifCli.textContent;
+        dirCli.textContent = $inptDirCli.value || dirCli.textContent;
+        telCli.textContent = $inptTelCli.value || telCli.textContent;
+        numFac.textContent = $inptNumFac ? ($inptNumFac.value || numFac.textContent) : numFac.textContent;
+        tipPago.textContent = $inptTipPago.value || tipPago.textContent;
+        conPago.textContent = $inptConPago.value || conPago.textContent;
+        editarArticulos();
+        $inptNombCli.value = '';
+        $inptRifCli.value = '';
+        $inptDirCli.value = '';
+        $inptTelCli.value = '';
+        if ($inptNumFac) $inptNumFac.value = '';
+        $inptTipPago.value = '';
+        $inptConPago.value = '';
+        // Recargar productos en la factura
+        const $cart = document.querySelector(".bill__products");
+        $cart.innerHTML = '';
+        cart.forEach((item) => {
+            let contenedor = document.createElement("div");
+            contenedor.classList.add("bill__product");
+            let itemCant = document.createElement("p");
+            itemCant.textContent = item.cantidad;
+            contenedor.appendChild(itemCant);
+            let itemName = document.createElement("p");
+            itemName.textContent = item.nombre;
+            contenedor.appendChild(itemName);
+            let itemUnitPrice = document.createElement("p");
+            itemUnitPrice.textContent = item.precio + " Bs";
+            contenedor.appendChild(itemUnitPrice);
+            let itemPrice = document.createElement("p");
+            itemPrice.textContent = item.precioTotal + " Bs";
+            contenedor.appendChild(itemPrice);
+            $cart.appendChild(contenedor);
+        });
+        let subtotal = document.querySelector("#subTotal");
+        let iva = document.querySelector("#iva");
+        let total = document.querySelector("#total");
+        subtotal.textContent = cart.reduce((sum , actual) => sum + actual.precioTotal , 0);
+        iva.textContent = (subtotal.textContent * 0.16).toFixed(2);
+        total.textContent = (+subtotal.textContent + +iva.textContent).toFixed(2);
+    }
+
+
+
+$editBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector(".modalEdit").style.display = "block";
+});
+
+$closeEditBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector(".modalEdit").style.display = "none";
+    $inptNombCli.value = '';
+    $inptRifCli.value = '';
+    $inptDirCli.value = '';
+    $inptTelCli.value = '';
+    $inptNumFac.value = '';
+    $inptTipPago.value = '';
+    $inptConPago.value = '';
+});
+
+$saveEditBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    editarDatos();
+    document.querySelector(".modalEdit").style.display = "none";})
+
+// function editarDatos() {
+
+//     //
+    
+//     nombCli.textContent = $inptNombCli.value || nombCli.textContent;
+//     rifCli.textContent = $inptRifCli.value || rifCli.textContent;
+//     dirCli.textContent = $inptDirCli.value || dirCli.textContent;
+//     telCli.textContent = $inptTelCli.value || telCli.textContent;
+//     numFac.textContent = $inptNumFac.value || numFac.textContent;
+//     tipPago.textContent = $inptTipPago.value || tipPago.textContent;
+//     conPago.textContent = $inptConPago.value ||conPago.textContent;
+
+    
+    
+//     // $inptNombCli.value = nombCli.textContent;
+   
+//     $inptNombCli.value = '';
+//     $inptRifCli.value = '';
+//     $inptDirCli.value = '';
+//     $inptTelCli.value = '';
+//     $inptNumFac.value = '';
+//     $inptTipPago.value = '';
+//     $inptConPago.value = '';
+
+ 
+// }
+//Anular factura
+const $btnAnular = document.querySelector("#del");
+const $btnEditar = document.querySelector("#edit");
+const $btnPrint = document.querySelector("#print");
+const billContainer = document.querySelector(".bill__container");
+
+ const clienteActual = localStorage.getItem("cliente");
+ const productos = localStorage.getItem("productos");
+ const facturas = localStorage.getItem("BDFactura");
+
+ const cliente = JSON.parse(clienteActual);
+ const cart = JSON.parse(productos);
+ const bdfacturas = JSON.parse(facturas);
+
+
+ console.log(cliente);
+console.log(bdfacturas)
+$btnAnular.addEventListener("click", (e)=>{
+    bdfacturas.forEach((element, idx) => {
+        console.log(element);
+        if(element.nroFactura === cliente.nroFactura){
+            
+            bdfacturas.splice(idx, 1);
+            
+            console.log(bdfacturas)
+            
+            $btnEditar.disabled = true;
+            $btnPrint.disabled = true;
+            $btnAnular.disabled = true;
+            billContainer.style.opacity = "0.6";
+            localStorage.setItem('BDFactura', JSON.stringify(bdfacturas))
+        }
+    });
+
+    // BDFactura.splice(idx, 1);
+    // localStorage.setItem('BDPorCobrar', JSON.stringify(BDPorCobrar));
+})
+
+
+
         let printBtn = document.querySelector("#print");
 
         printBtn.addEventListener("click", (e)=>{
@@ -252,8 +475,8 @@
         })
     </script>
 
-<script src="scripts/anular.js"></script>
-<script src="scripts/factura.js"></script>
+<!-- <script src="scripts/anular.js"></script>
+<script src="scripts/factura.js"></script> -->
 </body>
 
 </html>
