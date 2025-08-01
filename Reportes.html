@@ -45,7 +45,7 @@
                     <div>Cantidad</div>
                     <div>Precio Unitario</div>
                     <div>Precio Total</div>
-                    <div>Total de la Venta</div>
+                    <div>Total Venta </div>
                     <div>Forma de Pago</div>
                 </div>
 
@@ -222,6 +222,9 @@
                 font-size: 0.85rem;
             }
         }
+        .anulado{
+            opacity: 0.6;
+        }
     </style>
 
     <script>
@@ -280,6 +283,10 @@
                         factura.articulos.forEach(item => {
                             const row = document.createElement('div');
                             row.className = 'custom-table-row';
+                            
+                            if(factura.anulado){
+                                row.style.opacity = "0.6"
+                             }
                             row.innerHTML = `
                             <div>${factura.fecha || ''}</div>
                             <div>${factura.nroFactura || idx + 1}</div>
@@ -307,6 +314,7 @@
                     BDPorCobrar.forEach((factura, idx) => {
                         const row = document.createElement('div');
                         row.className = 'custom-table-row';
+                        
                         row.innerHTML = `
                         <div>${factura.nroFactura || idx + 1}</div>
                         <div>${factura.fecha || ''}</div>
