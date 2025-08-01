@@ -314,13 +314,19 @@ if ($buttonFactura) {
             BDFactura.push(facturaActual);
             console.log(cart)
             console.log(BDProducto)
+            let ventaValida = true;
             cart.forEach((item, idx) =>{
                 console.log(item)
                 BDProducto.forEach((producto, idx) =>{
                     console.log(producto)
                   if(item.codigo === producto.codigo){
+                    let anterior = producto.disponible;
                     producto.disponible -= item.cantidad;
-
+                    if(producto.disponible < 0){
+                        alert("La cantidad seleccionada es mayor a los productos disponibles");
+                        producto.disponible = anterior;
+                        ventaValida = false;
+                    }
                     console.log(BDProducto);
                   }
                 })
@@ -333,7 +339,10 @@ if ($buttonFactura) {
             localStorage.setItem("BDFactura", JSON.stringify(BDFactura, null, 2));
             localStorage.setItem("BDProducto", JSON.stringify(BDProducto, null, 2));
             // console.log(clienteActual)
-            window.location.href = "factura.html";
+            if(ventaValida){
+                window.location.href = "factura.html";
+
+            }
 
 
 
