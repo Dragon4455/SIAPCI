@@ -77,7 +77,7 @@
     <div id="buttons">
         <button id="print">Imprimir</button>
         <button id="edit">Editar</button>
-        <button id="del">Anular</button>
+        <button id="del">Eliminar</button>
     </div>
     <article>
 
@@ -138,9 +138,9 @@
                conPago.textContent = bdfacturas[codigoFactura].condicion;
 
                let $cart = document.querySelector(".bill__products");
-               cart = bdfacturas[codigoFactura].articulos;
+               let cart = bdfacturas[codigoFactura].articulos;
                 cart.forEach((item, index, )=>{
-                
+              
                 let contenedor = document.createElement("div");
     
                 contenedor.classList.add("bill__product");
@@ -319,15 +319,18 @@ const $saveEditBtn = document.getElementById('saveEdit');
         localStorage.setItem("productos", JSON.stringify(cart));
         // Si la factura existe en BDFactura, actualizarla también
         let codigoFactura = localStorage.getItem("facturaABuscar");
-        if (codigoFactura && bdfacturas[codigoFactura]) {
-            bdfacturas[codigoFactura].articulos = cart;
+       let indice = parseInt(numFac.textContent) - 1;
+        
+        if  (indice) {
+            bdfacturas[indice].articulos = cart;
+
             // Actualizar también los datos del cliente si fueron editados
-            bdfacturas[codigoFactura].nombre = $inptNombCli.value || nombCli.textContent;
-            bdfacturas[codigoFactura].rif = $inptRifCli.value || rifCli.textContent;
-            bdfacturas[codigoFactura].direccion = $inptDirCli.value || dirCli.textContent;
-            bdfacturas[codigoFactura].tlf = $inptTelCli.value || telCli.textContent;
-            bdfacturas[codigoFactura].metodo = $inptTipPago.value || tipPago.textContent;
-            bdfacturas[codigoFactura].condicion = $inptConPago.value || conPago.textContent;
+            bdfacturas[indice].nombre = $inptNombCli.value || nombCli.textContent;
+            bdfacturas[indice].rif = $inptRifCli.value || rifCli.textContent;
+            bdfacturas[indice].direccion = $inptDirCli.value || dirCli.textContent;
+            bdfacturas[indice].tlf = $inptTelCli.value || telCli.textContent;
+            bdfacturas[indice].metodo = $inptTipPago.value || tipPago.textContent;
+            bdfacturas[indice].condicion = $inptConPago.value || conPago.textContent;
             console.log(bdfacturas)
             localStorage.setItem("BDFactura", JSON.stringify(bdfacturas));
         }
@@ -402,34 +405,9 @@ $saveEditBtn.addEventListener('click', (e) => {
     editarDatos();
     document.querySelector(".modalEdit").style.display = "none";})
 
-// function editarDatos() {
 
-//     //
-    
-//     nombCli.textContent = $inptNombCli.value || nombCli.textContent;
-//     rifCli.textContent = $inptRifCli.value || rifCli.textContent;
-//     dirCli.textContent = $inptDirCli.value || dirCli.textContent;
-//     telCli.textContent = $inptTelCli.value || telCli.textContent;
-//     numFac.textContent = $inptNumFac.value || numFac.textContent;
-//     tipPago.textContent = $inptTipPago.value || tipPago.textContent;
-//     conPago.textContent = $inptConPago.value ||conPago.textContent;
-
-    
-    
-//     // $inptNombCli.value = nombCli.textContent;
-   
-//     $inptNombCli.value = '';
-//     $inptRifCli.value = '';
-//     $inptDirCli.value = '';
-//     $inptTelCli.value = '';
-//     $inptNumFac.value = '';
-//     $inptTipPago.value = '';
-//     $inptConPago.value = '';
-
- 
-// }
-//Anular factura
-const $btnAnular = document.querySelector("#del");
+//Eliminar factura
+const $btnEliminar = document.querySelector("#del");
 const $btnEditar = document.querySelector("#edit");
 const $btnPrint = document.querySelector("#print");
 const billContainer = document.querySelector(".bill__container");
@@ -445,7 +423,7 @@ const billContainer = document.querySelector(".bill__container");
 
  console.log(cliente);
 console.log(bdfacturas)
-$btnAnular.addEventListener("click", (e)=>{
+$btnEliminar.addEventListener("click", (e)=>{
     bdfacturas.forEach((element, idx) => {
         console.log(element);
         if(element.nroFactura === cliente.nroFactura){
@@ -456,7 +434,7 @@ $btnAnular.addEventListener("click", (e)=>{
             
             $btnEditar.disabled = true;
             $btnPrint.disabled = true;
-            $btnAnular.disabled = true;
+            $btnEliminar.disabled = true;
             billContainer.style.opacity = "0.6";
             localStorage.setItem('BDFactura', JSON.stringify(bdfacturas))
         }
