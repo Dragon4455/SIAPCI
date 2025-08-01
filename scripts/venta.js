@@ -333,7 +333,7 @@ if ($buttonFactura) {
             localStorage.setItem("BDFactura", JSON.stringify(BDFactura, null, 2));
             localStorage.setItem("BDProducto", JSON.stringify(BDProducto, null, 2));
             // console.log(clienteActual)
-            // window.location.href = "factura.html";
+            window.location.href = "factura.html";
 
 
 
@@ -375,7 +375,17 @@ let vencimiento30 = calcularVencimiento(fechaActual, 30);
         }
         facturaActual.estado = "Pendiente"
         BDPorCobrar.push(facturaActual);
-        
+          cart.forEach((item, idx) =>{
+                console.log(item)
+                BDProducto.forEach((producto, idx) =>{
+                    console.log(producto)
+                  if(item.codigo === producto.codigo){
+                    producto.disponible -= item.cantidad;
+
+                    console.log(BDProducto);
+                  }
+                })
+            })
         localStorage.setItem("BDPorCobrar", JSON.stringify(BDPorCobrar, null, 2));
     } else {
         alert("Debes establecer una condicion d pago de 15 o 30 días");
