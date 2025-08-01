@@ -78,6 +78,8 @@
         <button id="print">Imprimir</button>
         <button id="edit">Editar</button>
         <button id="del">Eliminar</button>
+        <button id="anlr">Anular</button>
+        <button id="save">Guardar</button>
     </div>
     <article>
 
@@ -110,12 +112,23 @@
             <button id="saveEdit">Guardar</button>
         </div>
         
-
+        
     </article>
+    
+</article>
+<!-- <script src="/scripts/venta.js"></script> -->
+<script>
 
-    </article>
-    <!-- <script src="/scripts/venta.js"></script> -->
-     <script>
+    //Botones de eventos en la factura
+         const $btnEliminar = document.querySelector("#del");
+         const $btnEditar = document.querySelector("#edit");
+         const $btnPrint = document.querySelector("#print");
+         const $btnAnlr = document.querySelector("#anlr");
+         const $btnSave = document.querySelector("#save");
+         let billContainer = document.querySelector(".bill__container");
+
+
+
         window.onload = function () {
             let codigoFactura = localStorage.getItem("facturaABuscar");
             if(codigoFactura){
@@ -126,7 +139,7 @@
                     rifCli = document.querySelector("#rifCli"),
                     dirCli = document.querySelector("#dirCli"),
                     telCli = document.querySelector("#telCli"),
-                    
+                    numfact= document.querySelector("#numFact"),
                     tipPago = document.querySelector("#tipPago"),
                     conPago = document.querySelector("#conPago")
 
@@ -136,6 +149,7 @@
                telCli.textContent = bdfacturas[codigoFactura].tlf;
                tipPago.textContent = bdfacturas[codigoFactura].metodo;
                conPago.textContent = bdfacturas[codigoFactura].condicion;
+               numFac.textContent = bdfacturas[codigoFactura].nroFactura
 
                let $cart = document.querySelector(".bill__products");
                let cart = bdfacturas[codigoFactura].articulos;
@@ -173,6 +187,10 @@
                 subtotal.textContent = cart.reduce((sum , actual) => sum + actual.precioTotal , 0);
                  iva.textContent = (subtotal.textContent * 0.16).toFixed(2);
                 total.textContent = (+subtotal.textContent + +iva.textContent).toFixed(2);
+              
+                if(bdfacturas[codigoFactura].anulado){
+                     billContainer.style.opacity = "0.6";
+                }
             }else{
 
                 const clienteActual = localStorage.getItem("cliente");
@@ -407,10 +425,7 @@ $saveEditBtn.addEventListener('click', (e) => {
 
 
 //Eliminar factura
-const $btnEliminar = document.querySelector("#del");
-const $btnEditar = document.querySelector("#edit");
-const $btnPrint = document.querySelector("#print");
-const billContainer = document.querySelector(".bill__container");
+
 
  const clienteActual = localStorage.getItem("cliente");
  const productos = localStorage.getItem("productos");
@@ -422,7 +437,8 @@ const billContainer = document.querySelector(".bill__container");
 
 
  console.log(cliente);
-console.log(bdfacturas)
+console.log(bdfacturas);
+
 $btnEliminar.addEventListener("click", (e)=>{
     bdfacturas.forEach((element, idx) => {
         console.log(element);
@@ -435,6 +451,7 @@ $btnEliminar.addEventListener("click", (e)=>{
             $btnEditar.disabled = true;
             $btnPrint.disabled = true;
             $btnEliminar.disabled = true;
+            $btnAnlr.disabled = true;
             billContainer.style.opacity = "0.6";
             localStorage.setItem('BDFactura', JSON.stringify(bdfacturas))
         }
@@ -442,6 +459,36 @@ $btnEliminar.addEventListener("click", (e)=>{
 
     // BDFactura.splice(idx, 1);
     // localStorage.setItem('BDPorCobrar', JSON.stringify(BDPorCobrar));
+})
+$btnAnlr.addEventListener("click", (e)=>{
+    bdfacturas.forEach((element, idx) => {
+        console.log(element);
+        if(element.nroFactura === cliente.nroFactura){
+    
+            if(bdfacturas[idx].anulado){
+                bdfacturas[idx].anulado = false;
+                billContainer.style.opacity = "1";
+            }else{
+
+                $btnEditar.disabled = true;
+                $btnPrint.disabled = true;
+                $btnEliminar.disabled = true;
+                
+                bdfacturas[idx].anulado= true;
+                billContainer.style.opacity = "0.6";
+            }
+            localStorage.setItem('BDFactura', JSON.stringify(bdfacturas));
+        }
+    });
+    
+    // BDFactura.splice(idx, 1);
+    // localStorage.setItem('BDPorCobrar', JSON.stringify(BDPorCobrar));
+});
+$btnSave.addEventListener("click", (e)=>{
+    alert("Guardado exitoso")
+    localStorage.setItem('BDFactura', JSON.stringify(bdfacturas));
+
+    window.location.href = "venta.html";
 })
 
 
