@@ -40,6 +40,10 @@ let $AddNameInput = document.querySelector("#productName"),
     $AddDateInput = document.querySelector("#productDate"),
     $AddProvInput = document.querySelector("#productProv");
 
+//seleccion de etiquetas del modal Add
+
+let $editOpts = document.querySelector("#edit__Opts")
+
 //Funciones de los botones.
 // boton add
 
@@ -104,6 +108,10 @@ function saveClose__Add(){
     cerrarModales();
 }
 
+// boton guardar modal edit
+
+
+
 // prevenir que se abran varias ventanas a la vez 
 
 function cerrarModales() {
@@ -152,6 +160,26 @@ const inventario = [
         ]
     }
 ];
+// function EditOpts(){
+
+//     let options = document.querySelectorAll(".optionEdit")
+
+//     options.forEach(item =>{
+//         item.remove(item)
+//     })
+//     inventario.forEach((item)=>{
+
+//         let option = document.createElement("option");
+//         option.className = "optionEdit"
+//         option.textContent = item.categoria;
+//         $editOpts.appendChild(option)
+//     })
+
+// }
+
+// $editOpts.addEventListener("click", (e)=>{
+//     editOpen()
+// })
 
 function renderCategorias() {
     const container = document.getElementById("Inv__Search");
