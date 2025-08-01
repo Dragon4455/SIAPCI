@@ -1,3 +1,7 @@
+let JsonProductos = localStorage.getItem("BDProducto");
+let BDProducto = JSON.parse(JsonProductos);
+
+console.log(BDProducto[0].disponible)
 // objetos que simulan productos
 
 let producto1 = {
@@ -118,17 +122,17 @@ const inventario = [
     {
         categoria: "Hojas",
         productos: [
-            {
-                nombre: "Examen",
-                cantidad: 3,
-                fechaCompra: "2025-07-10",
-                proveedor: "Papelería Central",
-                vendidos: 1
-            },
+            
+            //     nombre: "Examen",
+            //     cantidad: 3,
+            //     fechaCompra: "2025-07-10",
+            //     proveedor: "Papelería Central",
+            //     vendidos: 1
+            // },
 
             {
                 nombre: "Blancas",
-                cantidad: 10,
+                cantidad: BDProducto[1].disponible,
                 fechaCompra: "2025-07-01",
                 proveedor: "Papelería Central",
                 vendidos: 5
@@ -140,7 +144,7 @@ const inventario = [
         productos: [
             {
                 nombre: "Pointer",
-                cantidad: 6,
+                cantidad: BDProducto[0].disponible,
                 fechaCompra: "2025-07-05",
                 proveedor: "Papelería Central",
                 vendidos: 3
