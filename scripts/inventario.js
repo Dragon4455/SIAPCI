@@ -25,8 +25,16 @@ let $buttonAdd = document.querySelector("#add"),
     $buttonEdit = document.querySelector("#edit"),
     $buttonDel = document.querySelector("#del"),
     $buttonSave = document.querySelector("#save"),
-    $buttonAddClose = ("#Add__Close");
+    $buttonAddClose = ("#Add__Close"),
+    $InvSearch = document.querySelector("#Inv__Search");
 
+
+//seleccion de etiquetas del modal Add
+
+let $AddNameInput = document.querySelector("#productName"),
+    $AddQtyInput = document.querySelector("#productQuant"),
+    $AddDateInput = document.querySelector("#productDate"),
+    $AddProvInput = document.querySelector("#productProv");
 
 //Funciones de los botones.
 // boton add
@@ -62,9 +70,33 @@ function delClose() {
     document.getElementById("modal__Del").style.display = "none";
 }
 
-// boton guardar
+// boton guardar modal Add
 
-function saveClose(){
+function saveClose__Add(){
+
+    $InvSearch.innerHTML += `
+        <div class="inv__item" onclick="mostrarGlobal()" style="cursor:pointer;">
+            <span class="inv__name">${$AddNameInput.value}</span>
+            <span class="inv__qty">${$AddQtyInput.value}</span>
+            ${$AddQtyInput.value > 5 ? '<span class="inv__circle inv__circle--green"></span>' : '<span class="inv__circle inv__circle--red"></span>'}
+        </div>
+    `;
+
+    inventario.push({
+        categoria: $AddNameInput.value,
+        productos: [
+            {
+                nombre: $AddNameInput.value,
+                cantidad: parseInt($AddQtyInput.value),
+                fechaCompra: $AddDateInput.value,
+                proveedor: $AddProvInput.value,
+                vendidos: 0
+            }
+        ]
+    });
+
+    console.log(inventario);    
+
     cerrarModales();
 }
 
@@ -84,25 +116,6 @@ function cerrarModales() {
 
 const inventario = [
     {
-        categoria: "Lapiz",
-        productos: [
-            {
-                nombre: "Mongol",
-                cantidad: 6,
-                fechaCompra: "2025-07-01",
-                proveedor: "Papelería Central",
-                vendidos: 2
-            },
-            {
-                nombre: "Pointer",
-                cantidad: 2,
-                fechaCompra: "2025-06-15",
-                proveedor: "Distribuidora Escolar",
-                vendidos: 1
-            }
-        ]
-    },
-    {
         categoria: "Hojas",
         productos: [
             {
@@ -111,25 +124,26 @@ const inventario = [
                 fechaCompra: "2025-07-10",
                 proveedor: "Papelería Central",
                 vendidos: 1
+            },
+
+            {
+                nombre: "Blancas",
+                cantidad: 10,
+                fechaCompra: "2025-07-01",
+                proveedor: "Papelería Central",
+                vendidos: 5
             }
         ]
     },
     {
-        categoria: "Borradores",
+        categoria: "Pega",
         productos: [
             {
-                nombre: "Mongol",
+                nombre: "Pointer",
                 cantidad: 6,
                 fechaCompra: "2025-07-05",
                 proveedor: "Papelería Central",
                 vendidos: 3
-            },
-            {
-                nombre: "Pointer",
-                cantidad: 6,
-                fechaCompra: "2025-07-03",
-                proveedor: "Distribuidora Escolar",
-                vendidos: 2
             }
         ]
     }
@@ -230,5 +244,8 @@ function mostrarProducto(nombreCat, idx) {
         </div>
     `;
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", renderCategorias);
