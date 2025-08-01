@@ -312,12 +312,14 @@ if ($buttonFactura) {
             facturaActual.fecha = `${dia}/${mes}/${anio}`;
             facturaActual.montoTotal = cart.reduce((acum, item) => acum + item.precioTotal, 0);
             BDFactura.push(facturaActual);
+            console.log(cart)
+            console.log(BDProducto)
             cart.forEach((item, idx) =>{
                 console.log(item)
                 BDProducto.forEach((producto, idx) =>{
                     console.log(producto)
                   if(item.codigo === producto.codigo){
-                    producto.cantidad -= item.cantidad;
+                    producto.disponible -= item.cantidad;
 
                     console.log(BDProducto);
                   }
@@ -329,7 +331,8 @@ if ($buttonFactura) {
             localStorage.setItem("cliente", JSON.stringify(clienteActual, null, 2));
             localStorage.setItem("productos", JSON.stringify(cart, null, 2));
             localStorage.setItem("BDFactura", JSON.stringify(BDFactura, null, 2));
-            console.log(clienteActual)
+            localStorage.setItem("BDProducto", JSON.stringify(BDProducto, null, 2));
+            // console.log(clienteActual)
             // window.location.href = "factura.html";
 
 
